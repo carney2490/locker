@@ -9,9 +9,9 @@ require 'mail'
 load "./local_env.rb" if File.exists?("./local_env.rb")
 
 db_params = {
-   host: "lockerroom.ccar1za80ci4.us-west-2.rds.amazonaws.com:5432",
-   port:'5432',
-   dbname:'lockerroom',
+   host: ENV['db'],
+   port:ENV['port'],
+   dbname:ENV['dbname'],
    user:ENV['user'],
    password:ENV['password'],    
 }
@@ -370,8 +370,8 @@ post '/shop_cart' do
     number = params[:pnumber]
     total = quantity * price
     
-    session[:cart].push({"name": name, "description": description, "url": url, "size": size, "quantity": quantity, "price": price, 
-                         "total": total, "personalization": personalization, "lastname": lastname, "number": number})
+    session[:cart].push({"name" => name, "description" => description, "url" => url, "size" => size, "quantity" => quantity, "price" => price, 
+                         "total" => total, "personalization" => personalization, "lastname" => lastname, "number" => number})
     redirect '/shop_cart'
 end
 
