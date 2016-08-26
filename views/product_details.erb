@@ -1,0 +1,204 @@
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1><%=product_info[0]['product_name']%></h1>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="content">
+    <div class="container">
+        <div class="row">
+        <!-- *** LEFT COLUMN ***-->
+        <div class="col-lg-12">
+            <p class="lead">
+                <%=product_info[0]['product_description'] %>
+            </p>
+            <p class="goToDescription"><a href="#details" class="scroll-to text-uppercase">Scroll to order end date and delivery information</a>
+            </p>
+            <div class="row" id="productMain">
+                <div class="col-sm-6">
+                    <div id="mainImage">
+                        <img src="<%=product_info[0]['product_url']%>" alt="" class="img-responsive">
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="box">
+                        <form id="productPage" action="/shop_cart" method="post">
+                            <div class="sizes">
+                                <h3>Available sizes</h3>
+                                <hr></hr>
+                                <h4>Youth Sizes</h4>
+                                <%size_price.each do |item| %>
+                                    <%if item['size'] == "youth small" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">S</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="youth small" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "youth medium" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">M</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="youth medium" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "youth large" %>                       
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">L</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="youth large" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "youth extra large" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">XL</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="youth extra large" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%else%>
+                                    <%end%>
+                                <%end%>
+                                <h4>Adult Sizes</h4>
+                                <%size_price.each do |item| %>
+                                    <%if item['size'] == "adult small" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">S</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="adult small" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "adult medium" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">M</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="adult medium" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "adult large" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">L</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="adult large" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "adult extra large" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">XL</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="adult extra large" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "adult 2 extra large" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">2X</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="adult 2 extra large" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "adult 3 extra large" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">3X</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="adult 3 extra large" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "adult 4 extra large" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">4X</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="adult 4 extra large" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "adult 5 extra large " %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">5X</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="adult 5 extra large" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%else%>
+                                    <%end%>
+                                <%end%>
+                                <h4>Ladies</h4>
+                                <%size_price.each do |item| %>
+                                    <%if item['size'] == "ladies small" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">S</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="ladies small" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "ladies medium" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">M</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="ladies medium" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "ladies large" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">L</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="ladies large" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "ladies extra large" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">XL</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="ladies extra large" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "ladies 2 extra large" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#">XXL</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="ladies 2 extra large" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%else%>
+                                    <%end%>
+                                <%end%>
+                            </div>
+                            <div class="row quantity">
+                                <div class="ib">
+                                    <p class="float_left">Price: <input id="price" name="price" value="<%=size_price[0]['price'] %>" readonly></p>
+                                </div>
+                                 <div class="row">
+                                <div class="float_right">
+                                    <div class="input-group1 spinner">
+    <input type="text" name="quantity" class="form-control" value="1" min="0" max="200">
+    <div class="input-group-btn-vertical">
+      <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
+      <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
+    </div>
+  </div>
+  <p class="quantity1">Quantity</p>
+  </div>
+                                </div>
+                            </div>
+                            <div class="row personalize">
+                                <%product_info.each do |item| %>
+                                    <%if item['personalization'] == "yes" %>
+                                        <div class="">
+                                            <p class="float_left">
+                                                <label for="personalize">
+                                                    <h3 class="personalize_headline">Personalization
+                                                    <input type="checkbox" name="personalize" name="personalize" value="personalize" class="size-input"></h3>
+                                                    <h4>*Items are printed <mark>EXACTLY</mark> how you enter the text!(Including capital lettering & punctuation!)*</h4>
+                                                <h5>*Adult:14 characters per line*<br>
+                                                    *Youth:12 characters per line*</h5> 
+                                                   
+                                                </label>
+                                            </p>
+                                            </div>
+                                            <div class="float_right">
+                                                <p id="">Line 1: <input id="lastname" name="lastname" placeholder="Your custom message" type="text"></p>
+                                                <p id="">Line 2: <input id="pnumber" name="pnumber" placeholder="Your custom message" type="text"></p>
+                                                <p id="">Line 3: <input id="pnumber" name="pnumber" placeholder="Your custom message" type="text"></p>
+                                                <p id="">Line 4: <input id="pnumber" name="pnumber" placeholder="Your custom message" type="text"></p>
+                                            </div>
+                                    <%end%>
+                                <%end%>
+                            </div>
+                            <p class="text-center">
+                                <a href="/shop_cart">
+                                    <button type="submit" class="btn btn-template-main"><i class="fa fa-shopping-cart"></i> Add to cart</button>
+                                </a>
+                            </p>
+                             <input type="hidden" name="productName" value="<%=product_info[0]['product_name']%>">
+                             <input type="hidden" name="productDescription" value="<%=product_info[0]['product_description']%>">
+                             <input type="hidden" name="productURL" value="<%=product_info[0]['product_url']%>">
+                    </div>
+                </div>
+                           </form>
+                    </div>
+                </div>
+            </div>
+            <div class="box" id="details">
+                <h4>Order end date and delivery info:</h4>
+                <p><%=product_info[0]['order_information'] %></p>
+            </div>
+            <div class="box social" id="product-social">
+                <h4>Show it to your friends</h4>
+                        <p>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=URLENCODED_URL&t=TITLE"
+   onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+   target="_blank" title="Share on Facebook" class="external facebook" data-animate-hover="pulse"><i class="fa fa-facebook"></i></a>
+                             <a href="https://twitter.com/share?url=URLENCODED_URL&via=TWITTER_HANDLE&text=Look what I got from The Locker Room"
+   onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
+   target="_blank" title="Share on Twitter" class="external twitter" data-animate-hover="pulse"><i class="fa fa-twitter"></i></a>
+                            <a href="mailto:?subject= Look what I'm getting from The Locker Room &body= If you like this you can get one too.Hurry before the sale is over." class="email" data-animate-hover="pulse"><i class="fa fa-envelope"></i></a>
+                        </p>
+            </div>
+        </div>

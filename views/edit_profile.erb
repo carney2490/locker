@@ -1,0 +1,104 @@
+ <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>My account</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+
+                            <li><a href="/">Home</a>
+                            </li>
+                            <li>My account</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+<div class="container">
+    <div class="row">
+<div class="col-md-6">
+        <div class="table-responsive">
+           <table class="table table-bordered">
+               <tr><th>Current Profile</th>   
+               </tr>
+               <tbody>
+                  <%users.each do |users|%>
+                       <tr class="tablefont">
+                           <td>First Name: <%=users["fname"]%></td>
+                   </tr>
+                   <tr>
+                       <td>Last Name: <%=users["lname"]%></td>
+                   </tr>
+                   <tr>
+                       <td>Address: <%=users["address"]%></td>                        
+                   </tr>
+                   <tr>
+                       <td>City: <%=users["city"]%></td>                        
+                   </tr>
+                   <tr>
+                       <td>State: <%=users["state"]%></td>
+                   </tr>
+                   <tr>
+                       <td>Zipcode: <%=users["zipcode"]%></td>
+                   </tr>
+                   <tr>
+                       <td> Phone: <%=users["phone"]%></td>
+                   </tr>
+                   <tr>
+                       <td>Email: <%=users["email"]%></td>
+                       </tr>         
+                   <%end%>
+               </tbody>
+           </table>
+       </div>
+</div>
+<div class="col-md-6">
+<form role="form" id="edit_user" method="post">
+     <div class="form-group">
+         <label class="editprofile" for="fname">First Name:</label>
+         <input class="form-control profile" type="text" class="requiredField profile" value="<%=edit_profile[0]["fname"]%>" name="fname" >
+     </div>
+    
+       <div class="form-group">
+         <label class="editprofile" for="lname">Last Name:</label>
+         <input class="form-control profile" type="text" class="requiredField profile" value="<%=edit_profile[0]["lname"]%>" name="lname" >
+     </div>
+     
+     <div class="form-group">
+         <label class="editprofile" for="address">Address:</label>
+         <input class="form-control profile" type="text" class="requiredField profile" value="<%=edit_profile[0]["address"]%>" name="address">
+     </div>
+     
+     <div class="form-group">
+        <label class="editprofile" for="city">City:</label>
+        <input class="form-control profile"  type="text" class="requiredField profile" value="<%=edit_profile[0]["city"]%>" name="city">
+     </div>
+     
+     <div class="form-group">
+        <label class="editprofile" for="state">State:</label>
+        <input class="form-control profile"  type="text" class="requiredField profile" value="<%=edit_profile[0]["state"]%>" name="state">
+     </div>
+     
+     <div class="form-group">
+         <label class="editprofile" for="zip">Zip Code:</label>
+         <input  class="form-control profile"  type="text" class="requiredField profile" value="<%=edit_profile[0]["zipcode"]%>" name="zipcode">
+     </div>
+     
+     <div class="form-group">
+        <label class="editprofile" for="phone">Phone:</label>
+        <input class="form-control profile"  type="text" class="requiredField profile" value="<%=edit_profile[0]["phone"]%>" name="phone">
+     </div>
+     
+     <div class="form-group">
+        <label class="editprofile" for="email">Email:</label>
+        <input class="form-control profile"  type="email" class="requiredField profile" value="<%=edit_profile[0]["email"]%>" name="email">
+     </div>
+      
+            
+     <button type="submit" id="submit" class="btn-system btn-large">Update my profile</button>
+     <button href="/index" type="submit" id="cancel" class="btn-system btn-large">Cancel</button>
+     <div id="success" style="color:#34495e;"></div>
+   </form></div>
+    </div>
+</div>

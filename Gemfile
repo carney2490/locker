@@ -1,0 +1,7 @@
+source 'https://rubygems.org'
+ruby '2.2.4'
+gem 'tilt', '~>2.0.2'
+gem 'sinatra', '~>1.4.7'
+gem 'pg', '~>0.18.4'
+gem 'bcrypt', '~>3.1.11'
+gem 'pony', '~>1.11'

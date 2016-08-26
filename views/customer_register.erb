@@ -1,0 +1,108 @@
+ <div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>New account / Sign in</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+                            <li><a href="/">Home</a>
+                            </li>
+                            <li>New account / Sign in</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="content">
+            <div class="container">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="box">
+                            <h2 class="text-uppercase">New account</h2>
+
+                            <p class="lead">Not our registered customer yet?</p>
+                            
+                            <p class="text-muted">If you have any questions, please feel free to <a href="/contact">contact us</a>, we are here to help you.</p>
+
+                            <hr>
+
+                            <form action="/customer_register" method="post">
+                                <div class="form-group">
+                                    <label for="fname">First name</label>
+                                    <input type="text" class="form-control" name="fname" required>
+                                </div>
+                                   <div class="form-group">
+                                    <label for="lname">Last name</label>
+                                    <input type="text" class="form-control" name="lname" required>
+                                </div>
+                                   <div class="form-group">
+                                    <label for="address">Address</label>
+                                    <input type="text" class="form-control" name="address">
+                                </div>
+                                   <div class="form-group">
+                                    <label for="city">City</label>
+                                    <input type="text" class="form-control" name="city">
+                                </div>
+                                   <div class="form-group">
+                                    <label for="state">State</label>
+                                    <input type="text" class="form-control" name="state">
+                                </div>
+                                   <div class="form-group">
+                                    <label for="zipcode">Zipcode</label>
+                                    <input type="text" class="form-control" name="zipcode" required>
+                                </div>
+                                   <div class="form-group">
+                                    <label for="phone">Phone</label>
+                                    <input type="text" class="form-control" name="phone" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" name="email" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" name="password" required>
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit1" class="btn btn-template-main"><i class="fa fa-user-md"></i> Register</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+<%=message%>
+                    <div class="col-md-6">
+                        <div class="box">
+                            <h2 class="text-uppercase">Login</h2>
+
+                            <p class="lead">Already our customer?</p>
+                            <p class="text-muted"></p>
+
+                            <hr>
+
+                            <form action="/customer_register" method="post">
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="password">Password</label>
+                                    <input type="password" class="form-control" name="password">
+                                </div>
+                                <div class="text-center">
+                                    <button type="submit3" class="btn btn-template-main" id="submit3"><i class="fa fa-sign-in"></i> Log in</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.row -->
+
+            </div>
+            <!-- /.container -->
+        </div>
+        <!-- /#content -->

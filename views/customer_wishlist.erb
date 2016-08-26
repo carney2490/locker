@@ -1,0 +1,51 @@
+<div id="heading-breadcrumbs">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-7">
+                        <h1>My wishlist</h1>
+                    </div>
+                    <div class="col-md-5">
+                        <ul class="breadcrumb">
+
+                            <li><a href="/">Home</a>
+                            </li>
+                            <li>My wishlist</li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+    <div class="row">
+<div class="col-md-6">
+        <div class="table-responsive">
+           <table class="table table-bordered">
+               <tr><th>Wish List</th>   
+               </tr>
+               <tbody>
+                  <%wishlist.each do |wishlist|%>
+                       <tr class="tablefont">
+                           <td>Product: <%=wishlist["product_name"]%></td>
+                   </tr>
+                   <tr>
+                       <td>Description: <%=wishlist["product_description"]%></td>
+                   </tr>
+                   <tr>
+                       <td>Size: <%=wishlist["size"]%></td>                        
+                   </tr>
+                   <tr>
+                       <td>Price: <%=wishlist["price"]%></td>                        
+                   </tr>
+                   <tr>
+                       <td>Image: <%=wishlist["product_url"]%></td>
+                   </tr>
+                   <%end%>
+               </tbody>
+           </table>
+       </div>
+</div>
+            </div>
+</div>
+
