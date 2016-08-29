@@ -54,7 +54,9 @@ end
 
 get '/checkout1' do
     @title = 'Checkout Step1'
-    erb :checkout1, :locals => {:cart => session[:cart]}
+   # "The session cart total holds #{session[:cart]} " 
+     erb :checkout1, :locals => {:cart => session[:cart]}
+
 end
 
 get '/checkout2' do
@@ -342,16 +344,14 @@ post '/product_details' do
     erb :product_details, :locals => {:product_info => product_info, :size_price => size_price}
 end
 
-def moneyToFloat(money)
-    
-    result = money.to_f
-    return result
-end
 
 get '/shop_cart' do
     @title = 'Shopping Cart'
     session[:cart] ? cart = session[:cart] : cart = []
+     puts session[:cart]
     erb :shop_cart, :locals => {:cart => session[:cart]}
+   
+  
 end
 
 post '/shop_cart' do
@@ -364,15 +364,19 @@ post '/shop_cart' do
     url = params[:productURL]
     size = params[:size]
     quantity = params[:quantity].to_i
-    price = moneyToFloat(params[:price])
+    price = params[:price].to_f
     personalization = params[:personalize]
     lastname = params[:lastname]
     number = params[:pnumber]
     total = quantity * price
+
     
     session[:cart].push({"name" => name, "description" => description, "url" => url, "size" => size, "quantity" => quantity, "price" => price, 
                          "total" => total, "personalization" => personalization, "lastname" => lastname, "number" => number})
-    redirect '/shop_cart'
+   
+     redirect '/shop_cart'
+# "quantity is  #{quantity} , price is #{price} total is #{total} "
+  
 end
 
 post '/update_cart' do
@@ -382,6 +386,7 @@ post '/update_cart' do
     total = quantity * price
     session[:cart][index][:quantity] = quantity
     total = session[:cart][index][:total]
+
     redirect '/shop_cart'
 end
 
@@ -392,5 +397,7 @@ post '/remove_from_cart' do
 end
 post '/checkout1' do
     @title = 'Checkout Step1'
-    erb :checkout1, :locals => {:cart => session[:cart]}
+    # session[:cart]
+     erb :checkout1, :locals => {:cart => session[:cart]}
+
 end
