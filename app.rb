@@ -5,7 +5,7 @@ require 'bcrypt'
 require 'pony'
 require 'pg'
 require 'mail'
-
+require 'pp'
 load "./local_env.rb" if File.exists?("./local_env.rb")
 
 db_params = {
@@ -29,60 +29,93 @@ get '/' do
     @title = 'LockerRoom'
     erb :index
 end
+get '/faq' do
+    @title = 'FAQ'
+    erb :faq
+end
+
+get '/about' do
+    title = 'About'
+    erb :about
+end
 
 get '/contact' do
     @title = 'Contact Us'
     erb :contact
 end
-
-get '/customer_account' do
-    @title = 'Customer Account'
-    erb :customer_account
+Mail.defaults do
+  delivery_method :smtp, 
+  address: "email-smtp.us-east-1.amazonaws.com", 
+  port: 587,
+  :user_name  => ENV['a3smtpuser'],
+  :password   => ENV['a3smtppass'],
+  :enable_ssl => true
 end
 
+post '/contact' do
+  name = params[:firstname]
+  lname= params[:lastname]
+  email= params[:email]                  
+  comments = params[:message]
+  subject= params[:subject]
+  email_body = erb(:email2,:layout=>false, :locals=>{:subject => subject,:firstname => name, :lastname => lname, :email => email, :message => comments})
+  
+  mail = Mail.new do
+    from         ENV['from']
+    to           email
+    bcc          ENV['from']
+    subject      subject
+    
+    html_part do
+      content_type 'text/html'
+      body         email_body
+    end
+  end
 
+  mail.deliver!
+    erb :success, :locals => {:message => "Thanks for contacting us."}
+end
+
+post '/submit' do
+    erb :submit1
+end 
 
 get '/customer_order' do
     @title = 'Orders'
     erb :customer_order
 end
 
-get '/category_full' do
-    @title = 'Categories'
-    erb :category_full
-end
 
-get '/checkout1' do
-    @title = 'Checkout Step1'
-   # "The session cart total holds #{session[:cart]} " 
-     erb :checkout1, :locals => {:cart => session[:cart]}
-
-end
-
-get '/checkout2' do
-    @title = 'Checkout Step2'
-    erb :checkout2, :locals => {:cart => session[:cart]}
-end
-
-get '/checkout3' do
-    @title = 'Checkout Step3'
-    erb :checkout3, :locals => {:cart => session[:cart]}
-end
-
-get '/checkout4' do
-    @title = 'Checkout Step4'
-    session[:cart] = []
-    erb :checkout4, :locals => {:cart => session[:cart]}
-end
 
 get '/customer_register' do
     @title = 'Register'
     erb :customer_register, :locals => {:message => " ", :message1 => " "}
 end
 
-get '/product_details' do
-    @title = 'Product Details'
-    erb :product_details, :locals => {:product_info => " ", :size_price => " "}
+post '/customer_register' do
+    fname = params[:fname]
+    lname = params[:lname]
+    address = params[:address]
+    city = params[:city]
+    state = params[:state]
+    zipcode = params[:zipcode]
+    email = params[:email]
+    phone = params[:phone]
+    password = params[:password]
+    name = "#{fname} #{lname}"
+    
+    #This is for creating profile and preventing duplication
+    check_email = db.exec("SELECT * FROM users WHERE email = '#{email}'")
+    
+    hash = BCrypt::Password.create(password, :cost => 11) 
+    
+    
+        if check_email.num_tuples.zero? == false
+            erb :customer_register, :locals => {:message => " ", :message1 => "That email already exists"}
+        else
+            db.exec ("INSERT INTO users (fname, lname, address, city, state, zipcode, email, phone, encrypted_password, name ) VALUES ('#{fname}', '#{lname}', '#{address}','#{city}', '#{state}', '#{zipcode}', '#{email}','#{phone}', '#{hash}', '#{name}')" )
+            erb :success, :locals => {:message => "You have successfully registered.", :message1 => " "}
+        end
 end
 
 post '/facebook' do
@@ -119,83 +152,6 @@ post '/google' do
     session[:user] = name
     session[:email] = email
     redirect '/'   
-end
-get '/faq' do
-    @title = 'FAQ'
-    erb :faq
-end
-
-get '/about' do
-    title = 'About'
-    erb :about
-end
-
-Mail.defaults do
-  delivery_method :smtp, 
-  address: "email-smtp.us-east-1.amazonaws.com", 
-  port: 587,
-  :user_name  => ENV['a3smtpuser'],
-  :password   => ENV['a3smtppass'],
-  :enable_ssl => true
-end
-
-post '/contact' do
-  name = params[:firstname]
-  lname= params[:lastname]
-  email= params[:email]                  
-  comments = params[:message]
-  subject= params[:subject]
-  email_body = erb(:email2,:layout=>false, :locals=>{:subject => subject,:firstname => name, :lastname => lname, :email => email, :message => comments})
-  
-  mail = Mail.new do
-    from         ENV['from']
-    to           email
-    bcc          ENV['from']
-    subject      subject
-    
-    html_part do
-      content_type 'text/html'
-      body         email_body
-    end
-  end
-
-  mail.deliver!
-    erb :success, :locals => {:message => "Thanks for contacting us."}
-end
-
-get '/order_now' do
-    @title = 'Order Now'
-    erb :order_now
-end
-
-post '/submit' do
-    erb :submit1
-end    
-      
-post '/customer_register' do
-    fname = params[:fname]
-    lname = params[:lname]
-    address = params[:address]
-    city = params[:city]
-    state = params[:state]
-    zipcode = params[:zipcode]
-    email = params[:email]
-    phone = params[:phone]
-    password = params[:password]
-    name = "#{fname} #{lname}"
-    
-    #This is for creating profile and preventing duplication
-    check_email = db.exec("SELECT * FROM users WHERE email = '#{email}'")
-    
-    hash = BCrypt::Password.create(password, :cost => 11) 
-    
-    
-        if check_email.num_tuples.zero? == false
-            erb :customer_register, :locals => {:message => " ", :message1 => "That email already exists"}
-        else
-            db.exec ("INSERT INTO users (fname, lname, address, city, state, zipcode, email, phone, encrypted_password, name ) VALUES ('#{fname}', '#{lname}', '#{address}','#{city}', '#{state}', '#{zipcode}', '#{email}','#{phone}', '#{hash}', '#{name}')" )
-            erb :success, :locals => {:message => "You have successfully registered.", :message1 => " "}
-        end
 end
 
 post '/submit3' do
@@ -263,42 +219,6 @@ get '/logout' do
 	redirect '/'
 end
 
-get '/school_order_form2' do
-    @title = 'LockerRoom'
-    erb :school_order_form2
-end
-
-post '/school_order_form2' do
-    @title = 'LockerRoom'
-    erb :product_details, :locals => {:product_info => product_info, :size_price => size_price}
-end
-
-post '/product_details' do
-    url = params[ :url]
-    
-    size_price = db.exec("SELECT size, price FROM products2 WHERE product_url = '#{url}' ORDER BY size ASC  ")
-    
-    product_info = db.exec("SELECT product_name, product_description, order_information, product_url, personalization FROM products2 WHERE product_url = '#{url}' LIMIT 1")
-    
-    @title = 'Product Details'
-    erb :product_details, :locals => {:product_info => product_info, :size_price => size_price}
-end
-
-post '/checkout2' do
-    @title = 'Checkout Step2'
-    erb :checkout2,:locals => {:cart => session[:cart]}
-end
-
-post '/checkout3' do
-    @title = 'Checkout Step3'
-    erb :checkout3,:locals => {:cart => session[:cart]}
-end
-
-post '/checkout4' do
-    @title = 'Checkout Step4'
-    erb :checkout4,:locals => {:cart => session[:cart]}
-end
-
 get '/admin_page' do
     @title = 'Admin Page'
     mailing_list = db.exec("SELECT email FROM mailing_list")
@@ -328,36 +248,41 @@ post '/edit_profile' do
     redirect '/edit_profile'
 end
 
-get '/product_details' do
-    @title = 'Product Details'
-    erb :product_details
+get '/jefferson_morgan_items' do
+    @title = 'LockerRoom'
+    erb :jefferson_morgan_items
+end
+
+post '/jefferson_morgan_items' do
+    @title = 'LockerRoom'
+    erb :product_details, :locals => {:product_info => product_info, :size_price => size_price}
 end
 
 post '/product_details' do
-    url = params[:url]
+    url = params[ :url]
     
     size_price = db.exec("SELECT size, price FROM products2 WHERE product_url = '#{url}' ORDER BY size ASC  ")
     
     product_info = db.exec("SELECT product_name, product_description, order_information, product_url, personalization FROM products2 WHERE product_url = '#{url}' LIMIT 1")
     
-    @title = 'Product Details'
+
     erb :product_details, :locals => {:product_info => product_info, :size_price => size_price}
 end
-
 
 get '/shop_cart' do
     @title = 'Shopping Cart'
     session[:cart] ? cart = session[:cart] : cart = []
      puts session[:cart]
-    erb :shop_cart, :locals => {:cart => session[:cart]}
+    erb :shop_cart, :locals => {:cart => session[:cart], :ordertotal => session[:ordertotal]}
    
   
 end
 
-post '/shop_cart' do
+post '/add_to_cart' do
     @title = 'Shopping Cart'
     
     session[:cart] ||= []
+    session[:ordertotal] ||= 0.0
     
     name = params[:productName]
     description = params[:productDescription]
@@ -369,13 +294,13 @@ post '/shop_cart' do
     lastname = params[:lastname]
     number = params[:pnumber]
     total = quantity * price
-
-    
+    session[:ordertotal] += total
+        
     session[:cart].push({"name" => name, "description" => description, "url" => url, "size" => size, "quantity" => quantity, "price" => price, 
                          "total" => total, "personalization" => personalization, "lastname" => lastname, "number" => number})
-   
+
      redirect '/shop_cart'
-# "quantity is  #{quantity} , price is #{price} total is #{total} "
+
   
 end
 
@@ -395,9 +320,59 @@ post '/remove_from_cart' do
     session[:cart].delete_at(index)
     redirect '/shop_cart'
 end
+
+get '/checkout1' do
+    @title = 'Checkout Step1'
+   # "Session cart is #{session[:cart]}"
+     erb :checkout1, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+
+end
+
+get '/checkout2' do
+    @title = 'Checkout Step2'
+    erb :checkout2, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+end
+
+get '/checkout3' do
+    @title = 'Checkout Step3'
+    erb :checkout3, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+end
+
+get '/checkout4' do
+    @title = 'Checkout Step4'
+    session[:cart] = []
+    erb :checkout4, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+end
+
 post '/checkout1' do
     @title = 'Checkout Step1'
-    # session[:cart]
-     erb :checkout1, :locals => {:cart => session[:cart]}
+    session[:customerinfo] ||= []
+    firstname = params['firstname']
+    lastname = params['lastname']
+    company = params['company']
+    address = params['address']
+    city = params['city']
+    state = params['state']
+    zip = params['zip']
+    email = params['email']
+    telephone = params['telephone']
+    
+   session[:customerinfo].push({"firstname" => firstname,"lastname" => lastname, "company" => company, "address" => address, "city" => city, "state" => state, "zip" => zip, "email" => email, "telephone" => telephone})
+   erb :checkout1, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
 
+end
+post '/checkout2' do
+    @title = 'Checkout Step2'
+    
+    erb :checkout2,:locals => {:cart => session[:cart],:customerinfo => session[:customerinfo],:ordertotal => session[:ordertotal]}
+end
+
+post '/checkout3' do
+    @title = 'Checkout Step3'
+    erb :checkout3,:locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+end
+
+post '/checkout4' do
+    @title = 'Checkout Step4'
+    erb :checkout4,:locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
 end

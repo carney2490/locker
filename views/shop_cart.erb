@@ -103,13 +103,13 @@
                             <tbody>
                                 <tr>
                                     <td>Order subtotal</td>
-                                    <th class="subtotal"></th>
-                                    <input type="hidden" value=  class="subtotal" name="subtotal">
+                                    <th><%= ordertotal %></th>
+                                    
 
                                 </tr>
                                 <tr>
                                     <td>Shipping and handling</td>
-                                    <th>$<span class="sandh">10.00</span></th>
+                                    <th>$10.00</th>
                                 </tr>
                                 <tr>
                                     <td>Tax</td>
@@ -117,7 +117,7 @@
                                 </tr>
                                 <tr class="total">
                                     <td>Total</td>
-                                    <th id="gtotal"></th>
+                                    <th><%= ordertotal + 10.00 %></th>
                                 </tr>
                             </tbody>
                         </table>
