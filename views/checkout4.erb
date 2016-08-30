@@ -22,6 +22,14 @@
                     <form method="post" action="/checkout4">
                         <ul class="nav nav-pills nav-justified">
                             <li><a href="/checkout1"><i class="fa fa-map-marker"></i><br>Address</a>
+                            <% cart2.each_with_index do |item,index| %>
+                                    <input type="hidden" value='<%= item['firstname']%>' name='firstname'>
+                                    <input type="hidden" value='<%= item['lastname']%>' name='lastname'>
+                                    <input type="hidden" value='<%= item['street']%>' name='street'>
+                                    <input type="hidden" value='<%= item['city']%>' name='city'>
+                                    <input type="hidden" value='<%= item['state']%>' name='state'>
+                                    <input type="hidden" value='<%= item['zip']%>' name='zip'>
+                    <%end%>
                             </li>
                             <li><a href="/checkout2"><i class="fa fa-truck"></i><br>Delivery Method</a>
                             </li>

@@ -102,7 +102,6 @@ post '/customer_register' do
     email = params[:email]
     phone = params[:phone]
     password = params[:password]
-    name = "#{fname} #{lname}"
     
     #This is for creating profile and preventing duplication
     check_email = db.exec("SELECT * FROM users WHERE email = '#{email}'")
@@ -113,7 +112,7 @@ post '/customer_register' do
         if check_email.num_tuples.zero? == false
             erb :customer_register, :locals => {:message => " ", :message1 => "That email already exists"}
         else
-            db.exec ("INSERT INTO users (fname, lname, address, city, state, zipcode, email, phone, encrypted_password, name ) VALUES ('#{fname}', '#{lname}', '#{address}','#{city}', '#{state}', '#{zipcode}', '#{email}','#{phone}', '#{hash}', '#{name}')" )
+            db.exec ("INSERT INTO users (fname, lname, address, city, state, zipcode, email, phone, encrypted_password, name,customer ) VALUES ('#{fname}', '#{lname}', '#{address}','#{city}', '#{state}', '#{zipcode}', '#{email}','#{phone}', '#{hash}', '#{name}')" )
             erb :success, :locals => {:message => "You have successfully registered.", :message1 => " "}
         end
 end
@@ -347,25 +346,28 @@ end
 post '/checkout1' do
     @title = 'Checkout Step1'
     session[:customerinfo] ||= []
-    firstname = params['firstname']
-    lastname = params['lastname']
-    company = params['company']
-    address = params['address']
-    city = params['city']
-    state = params['state']
-    zip = params['zip']
-    email = params['email']
-    telephone = params['telephone']
+   
     
-   session[:customerinfo].push({"firstname" => firstname,"lastname" => lastname, "company" => company, "address" => address, "city" => city, "state" => state, "zip" => zip, "email" => email, "telephone" => telephone})
    erb :checkout1, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
 
 end
 post '/checkout2' do
     @title = 'Checkout Step2'
-    
-    erb :checkout2,:locals => {:cart => session[:cart],:customerinfo => session[:customerinfo],:ordertotal => session[:ordertotal]}
-end
+    firstname = params[:firstname]
+    lastname = params[:lastname]
+    company = params[:company]
+    street = params[:street]
+    city = params[:city]
+    state = params[:state]
+    zip = params[:zip]
+    phone=params[:phone]
+    email = params[:email]
+     session[:cart2] = []
+     session[:cart2].push({"firstname" => firstname, "lastname" => lastname, "company" => company, "street" => street, "city" => city , "state" => state, "zip" => zip, "phone" => phone, "email" => email})
+     
+
+    erb :checkout2,:locals => {:cart => session[:cart],:customerinfo => session[:customerinfo],:ordertotal => session[:ordertotal],:cart2 => session[:cart2]}
+  end
 
 post '/checkout3' do
     @title = 'Checkout Step3'
@@ -374,5 +376,25 @@ end
 
 post '/checkout4' do
     @title = 'Checkout Step4'
-    erb :checkout4,:locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+    firstname = params[:firstname]
+    lastname = params[:lastname]
+    street = params[:street]
+    city = params[:city]
+    state = params[:state]
+    zip = params[:zip]
+    order_date = Time.now
+   
+     puts session[:cart2]
+    order_number = '2'
+    db.exec("INSERT INTO users(fname,lname,address,city,state,zipcode) 
+            VALUES ('#{firstname}','#{lastname}','#{street}','#{city}','#{state}','#{zip}')")
+       
+      session[:cart].each do |m|
+
+     
+          db.exec ("INSERT INTO orders (product_name,quantity,line1,line2,line3,line4,unit_price,total_price,order_date) 
+                    VALUES ('#{m['name']}','#{m['quantity']}','#{m['line1']}','#{m['line2']}','#{m['line3']}','#{m['line4']}',
+                    '#{m['price']}','#{m['total']}','#{order_date}')" )
+      end
+    erb :checkout4,:locals => {:cart => session[:cart],:cart2 => session[:cart2],:ordertotal => session[:ordertotal]}
 end
