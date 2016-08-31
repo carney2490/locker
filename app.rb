@@ -19,11 +19,11 @@ db_params = {
 db = PG::Connection.new(db_params)
 
 set :sessions, 
-	key: ENV['sessionkey'],
-	domain:  ENV['domain'],
-	path: '/',
-	expire_after: 3600,
-	secret: ENV['sessionsecret']
+  key: ENV['sessionkey'],
+  domain:  ENV['domain'],
+  path: '/',
+  expire_after: 3600,
+  secret: ENV['sessionsecret']
 
 get '/' do
     @title = 'LockerRoom'
@@ -168,16 +168,16 @@ post '/submit3' do
     password1 = match_login[0]['encrypted_password']
     comparePassword = BCrypt::Password.new(password1)
     user_type = match_login[0]['user_type']
-	email =  match_login[0]['email']
+    email =  match_login[0]['email']
     
       if match_login[0]['email'] == email &&  comparePassword == password
 
-		 
-		  session[:user_type] = user_type
+     
+      session[:user_type] = user_type
           session[:email] = email  
           erb :index
       else
-		  erb :customer_register, :locals => {:message => "invalid username and password combination"}
+      erb :customer_register, :locals => {:message => "invalid username and password combination"}
       end
     redirect '/' 
 end
@@ -195,7 +195,7 @@ post '/login' do
     
     password1 = match_login[0]['encrypted_password']
     comparePassword = BCrypt::Password.new(password1)
-	
+  
     user_email = match_login[0]['email']
     user_name = match_login[0]['name']
     user_type = match_login[0]['user_type']
@@ -207,18 +207,17 @@ post '/login' do
           puts "authenticated"
           erb :index
       else
-		  erb :login, :locals => {:message => "invalid username and password combination"}
+      erb :login, :locals => {:message => "invalid username and password combination"}
       end 
 end
       
 get '/logout' do
-	session[:user] = nil
-	session[:usertype] = nil
+  session[:user] = nil
+  session[:usertype] = nil
     session[:email] = nil
     session[:ordertotal] = nil
-    session[:cart] = nil
-    
-	redirect '/'
+   session[:cart] = nil
+  redirect '/'
 end
 
 get '/admin_page' do
@@ -263,7 +262,7 @@ end
 post '/product_details' do
     url = params[ :url]
     
-    size_price = db.exec("SELECT size, price FROM products2 WHERE product_url = '#{url}' ORDER by size DESC")
+    size_price = db.exec("SELECT size, price FROM products2 WHERE product_url = '#{url}' ORDER BY size ASC  ")
     
     product_info = db.exec("SELECT product_name, product_description, order_information, product_url, personalization FROM products2 WHERE product_url = '#{url}' LIMIT 1")
     
@@ -296,12 +295,11 @@ post '/add_to_cart' do
     line2 = params[:line2]
     line3 = params[:line3]
     line4 = params[:line4]
-    number = params[:pnumber]
     total = quantity * price
     session[:ordertotal] += total
         
-    session[:cart].push({"name" => name, "description" => description, "url" => url, "size" => size, "quantity" => quantity, "price" => price, 
-                         "total" => total, "line1" => line1, "line2" => line2, "line3" => line3, "line4" => line4,"number" => number})
+    session[:cart].push({"productname" => name, "description" => description, "url" => url, "size" => size, "quantity" => quantity, "price" => price, 
+                         "total" => total, "line1" => line1, "line2" => line2, "line3" => line3, "line4" => line4})
 puts
 
      redirect '/shop_cart'
@@ -329,8 +327,14 @@ end
 get '/checkout1' do
     @title = 'Checkout Step1'
    # "Session cart is #{session[:cart]}"
-     erb :checkout1, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+   if "#{session[:email]}" == "josephmckenzieaz@yahoo.com"
+      customerinfo = db.exec("SELECT * FROM users WHERE email='#{session[:email]}'")
+      erb :checkout1_prefilled, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal], :customerinfo => customerinfo}
 
+  else
+      erb :checkout1, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+
+  end
 end
 
 get '/checkout2' do
@@ -346,7 +350,7 @@ end
 get '/checkout4' do
     @title = 'Checkout Step4'
     session[:cart] = []
-    erb :checkout4, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+    erb :checkout4, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal],:delivery_method => delivery_method}
 end
 
 post '/checkout1' do
@@ -354,7 +358,7 @@ post '/checkout1' do
     session[:customerinfo] ||= []
    
     
-   erb :checkout1, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+   erb :checkout1, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal],:customerinfo => customerinfo}
 
 end
 post '/checkout2' do
@@ -377,7 +381,8 @@ post '/checkout2' do
 
 post '/checkout3' do
     @title = 'Checkout Step3'
-    erb :checkout3,:locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+    delivery_method = params[:delivery_method]
+    erb :checkout3,:locals => {:cart => session[:cart],:ordertotal => session[:ordertotal],:delivery_method => delivery_method}
 end
 
 post '/checkout4' do
@@ -389,9 +394,10 @@ post '/checkout4' do
     state = params[:state]
     zip = params[:zip]
     order_date = Time.now
-   
+    delivery_method = params[:delivery_method]
      puts session[:cart2]
      puts session[:cart]
+     payment_method = params[:payment_method]
     order_number = '2'
     db.exec("INSERT INTO users(fname,lname,address,city,state,zipcode) 
             VALUES ('#{firstname}','#{lastname}','#{street}','#{city}','#{state}','#{zip}')")
@@ -399,12 +405,13 @@ post '/checkout4' do
       session[:cart].each do |m|
 
      
-          db.exec ("INSERT INTO orders (product_name,quantity,line1,line2,line3,line4,unit_price,total_price,order_date) 
-                    VALUES ('#{m['name']}','#{m['quantity']}','#{m['line1']}','#{m['line2']}','#{m['line3']}','#{m['line4']}',
-                    '#{m['price']}','#{m['total']}','#{order_date}')" )
+          db.exec ("INSERT INTO orders (product_name,quantity,line1,line2,line3,line4,unit_price,total_price,order_date,delivery_method,payment_method) 
+                    VALUES ('#{m['productname']}','#{m['quantity']}','#{m['line1']}','#{m['line2']}','#{m['line3']}','#{m['line4']}',
+                    '#{m['price']}','#{m['total']}','#{order_date}','#{delivery_method}','#{payment_method}')" )
       end
-    erb :checkout4,:locals => {:cart => session[:cart],:cart2 => session[:cart2],:ordertotal => session[:ordertotal]}
+    erb :checkout4,:locals => {:cart => session[:cart],:cart2 => session[:cart2],:ordertotal => session[:ordertotal],:delivery_method => delivery_method}
 end
+
 get '/receipt' do
     @title = 'Receipt'
    
