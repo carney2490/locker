@@ -366,3 +366,10 @@ text-align: left;
 .mailing_list_headline {
     font-weight:700;
 }
+.success_message {
+    padding-left:2.0rem;
+}
+.checkout_finished {
+    padding-left:2.0rem;
+    font-weight:600;
+    font-size:2.0rem;

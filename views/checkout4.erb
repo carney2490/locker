@@ -46,6 +46,7 @@
                                             <th colspan="2">Product</th>
                                             <th>Quantity</th>
                                             <th>Size</th>
+                                            <th>Personalization</th>
                                             <th>Unit price</th>
                                             <th>Total</th>
                                         </tr>
@@ -69,10 +70,16 @@
                                             <%= item['size'] %>
                                         </td>
                                         <td class="text-center">
-                                            <%=item['price'] %>
+                                        <%= item['line1'] %><br>
+                                            <%= item['line2'] %><br>
+                                            <%= item['line3'] %><br>
+                                            <%= item['line4'] %>
+                                        </td>
+                                        <td class="text-center">
+                                            $<%=item['price'] %>
                                         </td>
                                         <td class="text-center itemTotals">
-                                            <%=item['total'] %>
+                                            $<%=item['total'] %>
                                         </td>
                                         <td> 
                                             <i class="fa fa-trash-o" data-index="<%= index %>"></i> 
@@ -83,7 +90,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="5">Total</th>
-                                            <th><%= ordertotal %></th>
+                                            <th>$<%= ordertotal %></th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -96,8 +103,8 @@
                                 <a href="/checkout3" class="btn btn-default"><i class="fa fa-chevron-left"></i>Back to Payment method</a>
                             </div>
                             <div class="pull-right">
-                                <button type="submit" class="btn btn-template-main">Finalize Order<i class="fa fa-chevron-right"></i>
-                                </button>
+                                <a href="/receipt" type="submit" class="btn btn-template-main">Finalize Order<i class="fa fa-chevron-right"></i>
+                                </a>
                             </div>
                         </div>
                     </form>
@@ -116,7 +123,7 @@
                             <tbody>
                                 <tr>
                                     <td>Order subtotal</td>
-                                    <th><%= ordertotal %></th>
+                                    <th>$<%= ordertotal %></th>
                                     
 
                                 </tr>
@@ -130,7 +137,7 @@
                                 </tr>
                                 <tr class="total">
                                     <td>Total</td>
-                                    <th><%= ordertotal + 10.00 %></th>
+                                    <th>$<%= ordertotal + 10.00 %></th>
                                 </tr>
                             </tbody>
                         </table>

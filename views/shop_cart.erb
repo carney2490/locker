@@ -18,7 +18,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <p> There are <%= cart.length %> item(s) in your cart.</p>
+                <% if cart %>
+                <p> There is <%= cart.length %> item(s) in your cart.</p>
+                <% else %>
+                <p>There are 0 items in your cart.</p>
+                <% end %>
             </div>
             <div class="col-md-9 clearfix" id="basket">
                 <div class="box">
@@ -30,12 +34,16 @@
                                         <th colspan="2">Product</th>
                                         <th>Quantity</th>
                                         <th>Size</th>
+                                        <th>Personalization</th>
                                         <th>Price</th>
                                         <th colspan="2" class="text-left">Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                   
                                     <% cart.each_with_index do |item,index| %>
+                                    
+                                    
                                     <tr>
                                         <td>
                                             <a href="#">
@@ -53,10 +61,16 @@
                                             <%= item['size'] %>
                                         </td>
                                         <td class="text-center">
-                                            <%=item['price'] %>
+                                        <%= item['line1'] %><br>
+                                            <%= item['line2'] %><br>
+                                            <%= item['line3'] %><br>
+                                            <%= item['line4'] %>
+                                        </td>
+                                        <td class="text-center">
+                                            $<%=item['price'] %>
                                         </td>
                                         <td class="text-center itemTotals">
-                                            <%=item['total'] %>
+                                            $<%=item['total'] %>
                                         </td>
                                         <td> 
                                             <i class="fa fa-trash-o" data-index="<%= index %>"></i> 
@@ -67,11 +81,13 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="5">Total</th>
-                                        <th colspan="2" class="text-left subtotal"></th>
+                                        <th colspan="2" class="text-left">$<%= ordertotal %></th>
                                     </tr>
                                 </tfoot>
                             </table>
                         </div>
+                        
+                        
                         <!-- /.table-responsive -->
                         <div class="box-footer">
                             <div class="pull-left">
@@ -90,6 +106,8 @@
                 </div>
                 <!-- /.box -->
             </div>
+           
+           
             <!-- /.col-md-9 -->
             <div class="col-md-3">
                 <div class="box" id="order-summary">
@@ -103,7 +121,7 @@
                             <tbody>
                                 <tr>
                                     <td>Order subtotal</td>
-                                    <th><%= ordertotal %></th>
+                                    <th>$<%= ordertotal %></th>
                                     
 
                                 </tr>
@@ -117,7 +135,7 @@
                                 </tr>
                                 <tr class="total">
                                     <td>Total</td>
-                                    <th><%= ordertotal + 10.00 %></th>
+                                    <th>$<%= ordertotal + 10.00 %></th>
                                 </tr>
                             </tbody>
                         </table>

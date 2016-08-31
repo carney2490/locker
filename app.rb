@@ -215,6 +215,9 @@ get '/logout' do
 	session[:user] = nil
 	session[:usertype] = nil
     session[:email] = nil
+    session[:ordertotal] = nil
+    session[:cart] = nil
+    
 	redirect '/'
 end
 
@@ -260,7 +263,7 @@ end
 post '/product_details' do
     url = params[ :url]
     
-    size_price = db.exec("SELECT size, price FROM products2 WHERE product_url = '#{url}' ORDER BY size ASC  ")
+    size_price = db.exec("SELECT size, price FROM products2 WHERE product_url = '#{url}' ORDER by size DESC")
     
     product_info = db.exec("SELECT product_name, product_description, order_information, product_url, personalization FROM products2 WHERE product_url = '#{url}' LIMIT 1")
     
@@ -401,4 +404,10 @@ post '/checkout4' do
                     '#{m['price']}','#{m['total']}','#{order_date}')" )
       end
     erb :checkout4,:locals => {:cart => session[:cart],:cart2 => session[:cart2],:ordertotal => session[:ordertotal]}
+end
+get '/receipt' do
+    @title = 'Receipt'
+   
+    erb :receipt,:locals => {:cart => session[:cart],:cart2 => session[:cart2],:ordertotal => session[:ordertotal],:message =>"Thanks for your order, here is a receipt you can print for your records."}
+    
 end

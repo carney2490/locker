@@ -1,0 +1,85 @@
+<div id="heading-breadcrumbs">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-7">
+                <h1>Checkout - Order Receipt</h1>
+            </div>
+            <div class="col-md-5">
+                <ul class="breadcrumb">
+                    <li><a href="/">Home</a>
+                    </li>
+                    <li>Checkout - Order Receipt</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<center><div class = "checkout_finished">
+<%= message %>
+</div></center>
+ <div class="content">
+     
+               
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Product</th>
+                                            <th>Quantity</th>
+                                            <th>Size</th>
+                                            <th>Personalization</th>
+                                            <th>Unit price</th>
+                                            <th>Total</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <% cart.each_with_index do |item,index| %>
+                                    <tr>
+                        
+                                        <td>
+                                            <%= item['name'] %><br>
+                                            <%= item['description'] %>
+                                        </td>
+                                        <td class="text-center">
+                                            <%= item['quantity'] %>
+                                        </td>
+                                        <td class="text-center">
+                                            <%= item['size'] %>
+                                        </td>
+                                        <td class="text-center">
+                                        <%= item['line1'] %><br>
+                                            <%= item['line2'] %><br>
+                                            <%= item['line3'] %><br>
+                                            <%= item['line4'] %>
+                                        </td>
+                                        <td class="text-center">
+                                            <%=item['price'] %>
+                                        </td>
+                                        <td class="text-center itemTotals">
+                                            <%=item['total'] %>
+                                        </td>
+                                       
+                                    </tr>
+                                    <% end %>
+                                </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <th colspan="5">SubTotal</th>
+                                            <th>$<%= ordertotal %></th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="5">Shipping</th>
+                                            <th>$10.00</th>
+                                        </tr>
+                                        <tr>
+                                            <th colspan="5">Order Total</th>
+                                            <th>$<%= ordertotal + 10.00 %></th>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                            <!-- /.table-responsive -->
+                        </div>
+    
+
