@@ -271,7 +271,7 @@ end
 get '/shop_cart' do
     @title = 'Shopping Cart'
     session[:cart] ? cart = session[:cart] : cart = []
-     puts session[:cart]
+     
     erb :shop_cart, :locals => {:cart => session[:cart], :ordertotal => session[:ordertotal]}
    
   
@@ -289,14 +289,17 @@ post '/add_to_cart' do
     size = params[:size]
     quantity = params[:quantity].to_i
     price = params[:price].to_f
-    personalization = params[:personalize]
-    lastname = params[:lastname]
+    line1 = params[:line1]
+    line2 = params[:line2]
+    line3 = params[:line3]
+    line4 = params[:line4]
     number = params[:pnumber]
     total = quantity * price
     session[:ordertotal] += total
         
     session[:cart].push({"name" => name, "description" => description, "url" => url, "size" => size, "quantity" => quantity, "price" => price, 
-                         "total" => total, "personalization" => personalization, "lastname" => lastname, "number" => number})
+                         "total" => total, "line1" => line1, "line2" => line2, "line3" => line3, "line4" => line4,"number" => number})
+puts
 
      redirect '/shop_cart'
 
@@ -385,6 +388,7 @@ post '/checkout4' do
     order_date = Time.now
    
      puts session[:cart2]
+     puts session[:cart]
     order_number = '2'
     db.exec("INSERT INTO users(fname,lname,address,city,state,zipcode) 
             VALUES ('#{firstname}','#{lastname}','#{street}','#{city}','#{state}','#{zip}')")
