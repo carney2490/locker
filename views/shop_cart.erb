@@ -8,7 +8,7 @@
                 <ul class="breadcrumb">
                     <li><a href="/">Home</a>
                     </li>
-                    <li>Shopping cart</li>
+                    <li>Shopping cart</li> <%session[:usertype] %>
                 </ul>
             </div>
         </div>
@@ -18,11 +18,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <% if cart %>
-                <p> There is <%= cart.length %> item(s) in your cart.</p>
-                <% else %>
-                <p>There are 0 items in your cart.</p>
-                <% end %>
+                <p> There is <%= cart.length %> item(s) in your cart.</p>              
             </div>
             <div class="col-md-9 clearfix" id="basket">
                 <div class="box">
@@ -135,7 +131,7 @@
                                 </tr>
                                 <tr class="total">
                                     <td>Total</td>
-                                    <th>$<%= ordertotal + 10.00 %></th>
+                                    <th>$<%= ordertotal %></th>
                                 </tr>
                             </tbody>
                         </table>

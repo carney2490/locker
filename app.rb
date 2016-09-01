@@ -25,6 +25,16 @@ set :sessions,
   expire_after: 3600,
   secret: ENV['sessionsecret']
 
+def get_order_total()
+  order_total = 0.0
+    if session[:cart]
+      session[:cart].each do |item|
+        order_total += item["total"]
+      end
+    end
+  session[:ordertotal] = order_total
+end
+
 get '/' do
     @title = 'LockerRoom'
     erb :index
@@ -188,7 +198,6 @@ post '/login' do
     password = params[:password]
     
     match_login = db.exec("SELECT encrypted_password,user_type,email,name FROM users WHERE email = '#{email}'")
-    
         if match_login.num_tuples.zero? == true
             error = erb :login, :locals => {:message => "invalid email and password combination"}
             return error
@@ -200,6 +209,7 @@ post '/login' do
     user_email = match_login[0]['email']
     user_name = match_login[0]['name']
     user_type = match_login[0]['user_type']
+
     
       if match_login[0]['email'] == email && comparePassword == password
           session[:email] = user_email  
@@ -275,8 +285,9 @@ end
 get '/shop_cart' do
     @title = 'Shopping Cart'
     session[:cart] ? cart = session[:cart] : cart = []
+    get_order_total()
      
-    erb :shop_cart, :locals => {:cart => session[:cart], :ordertotal => session[:ordertotal]}
+    erb :shop_cart, :locals => {:cart => cart, :ordertotal => session[:ordertotal]}
    
   
 end
@@ -285,7 +296,6 @@ post '/add_to_cart' do
     @title = 'Shopping Cart'
     
     session[:cart] ||= []
-    session[:ordertotal] ||= 0.0
     
     name = params[:productName]
     description = params[:productDescription]
@@ -298,11 +308,9 @@ post '/add_to_cart' do
     line3 = params[:line3]
     line4 = params[:line4]
     total = quantity * price
-    session[:ordertotal] += total
         
     session[:cart].push({"productname" => name, "description" => description, "url" => url, "size" => size, "quantity" => quantity, "price" => price, 
                          "total" => total, "line1" => line1, "line2" => line2, "line3" => line3, "line4" => line4})
-puts
 
      redirect '/shop_cart'
 
@@ -315,8 +323,8 @@ post '/update_cart' do
     price = session[:cart][index][:price]
     total = quantity * price
     session[:cart][index][:quantity] = quantity
-    total = session[:cart][index][:total]
-
+    session[:cart][index][:total] = total
+    
     redirect '/shop_cart'
 end
 
