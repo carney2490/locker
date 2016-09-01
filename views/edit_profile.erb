@@ -24,30 +24,33 @@
                </tr>
                <tbody>
                   <%users.each do |users|%>
-                       <tr class="tablefont">
-                           <td>First Name: <%=users["fname"]%></td>
-                   </tr>
-                   <tr>
-                       <td>Last Name: <%=users["lname"]%></td>
-                   </tr>
-                   <tr>
-                       <td>Address: <%=users["address"]%></td>                        
-                   </tr>
-                   <tr>
-                       <td>City: <%=users["city"]%></td>                        
-                   </tr>
-                   <tr>
-                       <td>State: <%=users["state"]%></td>
-                   </tr>
-                   <tr>
-                       <td>Zipcode: <%=users["zipcode"]%></td>
-                   </tr>
-                   <tr>
-                       <td> Phone: <%=users["phone"]%></td>
-                   </tr>
-                   <tr>
-                       <td>Email: <%=users["email"]%></td>
-                       </tr>         
+                    <tr class="tablefont">
+                      <td>First Name: <%=users["fname"]%></td>
+                    </tr>
+                    <tr>
+                      <td>Last Name: <%=users["lname"]%></td>
+                    </tr>
+                    <tr>
+                      <td>Address: <%=users["address"]%></td>                        
+                    </tr>
+                    <tr>
+                      <td>City: <%=users["city"]%></td>                        
+                    </tr>
+                    <tr>
+                      <td>State: <%=users["state"]%></td>
+                    </tr>
+                    <tr>
+                      <td>Zipcode: <%=users["zipcode"]%></td>
+                    </tr>
+                    <tr>
+                      <td>Company: <%=users["company"]%></td>
+                    </tr>
+                    <tr>
+                      <td>Phone: <%=users["phone"]%></td>
+                    </tr>
+                    <tr>
+                      <td>Email: <%=users["email"]%></td>
+                    </tr>         
                    <%end%>
                </tbody>
            </table>
@@ -84,7 +87,12 @@
          <label class="editprofile" for="zip">Zip Code:</label>
          <input  class="form-control profile"  type="text" class="requiredField profile" value="<%=edit_profile[0]["zipcode"]%>" name="zipcode">
      </div>
-     
+    
+     <div class="form-group">
+        <label class="editprofile" for="city">Company:</label>
+        <input class="form-control profile"  type="text" class="requiredField profile" value="<%=edit_profile[0]["company"]%>" name="company">
+     </div>
+
      <div class="form-group">
         <label class="editprofile" for="phone">Phone:</label>
         <input class="form-control profile"  type="text" class="requiredField profile" value="<%=edit_profile[0]["phone"]%>" name="phone">

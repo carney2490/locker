@@ -112,7 +112,8 @@ post '/customer_register' do
         if check_email.num_tuples.zero? == false
             erb :customer_register, :locals => {:message => " ", :message1 => "That email already exists"}
         else
-            db.exec ("INSERT INTO users (fname, lname, address, city, state, zipcode, email, phone, encrypted_password, name,customer ) VALUES ('#{fname}', '#{lname}', '#{address}','#{city}', '#{state}', '#{zipcode}', '#{email}','#{phone}', '#{hash}', '#{name}')" )
+            db.exec ("INSERT INTO users (fname, lname, address, city, state, zipcode, email, phone, encrypted_password) 
+                      VALUES ('#{fname}', '#{lname}', '#{address}','#{city}', '#{state}', '#{zipcode}', '#{email}','#{phone}', '#{hash}')" )
             erb :success, :locals => {:message => "You have successfully registered.", :message1 => " "}
         end
 end
@@ -186,7 +187,7 @@ post '/login' do
     email = params[:email]
     password = params[:password]
     
-    match_login = db.exec("SELECT encrypted_password,user_type,email,name,user_name FROM users WHERE email = '#{email}'")
+    match_login = db.exec("SELECT encrypted_password,user_type,email,name FROM users WHERE email = '#{email}'")
     
         if match_login.num_tuples.zero? == true
             error = erb :login, :locals => {:message => "invalid email and password combination"}
@@ -230,7 +231,7 @@ end
 get '/edit_profile'do
     @title = 'Edit Profile'
     users = db.exec("SELECT * FROM users WHERE email='#{session[:email]}'")
-    edit_profile = db.exec("SELECT fname,lname,address,city,state,zipcode,email,phone FROM users WHERE email = '#{session[:email]}' ")  
+    edit_profile = db.exec("SELECT fname,lname,address,city,state,zipcode,email,phone,company FROM users WHERE email = '#{session[:email]}' ")  
     current_profile= db.exec("SELECT * FROM users WHERE email='#{session[:email]}'")
     erb :edit_profile, :locals => {:edit_profile => edit_profile,:users =>users,:current_profile =>current_profile}
 end
@@ -244,8 +245,9 @@ post '/edit_profile' do
    zipcode = params[:zipcode]
    email = params[:email]
    phone = params[:phone]
+   company = params[:company]
     users = db.exec("SELECT * FROM users WHERE email='#{session[:email]}'")       
-    update_profile = db.exec ("UPDATE users SET (fname,lname, address, city, state, zipcode, email, phone)  =  ('#{fname}','#{lname}', '#{address}','#{city}', '#{state}', '#{zipcode}', '#{email}', '#{phone}' ) WHERE email = '#{email}'" )
+    update_profile = db.exec ("UPDATE users SET (fname,lname, address, city, state, zipcode, email, phone,company)  =  ('#{fname}','#{lname}', '#{address}','#{city}', '#{state}', '#{zipcode}', '#{email}', '#{phone}', '#{company}' ) WHERE email = '#{email}'" )
     redirect '/edit_profile'
 end
 
@@ -327,7 +329,7 @@ end
 get '/checkout1' do
     @title = 'Checkout Step1'
    # "Session cart is #{session[:cart]}"
-   if "#{session[:email]}" == "josephmckenzieaz@yahoo.com"
+   if "#{session[:email]}" != ""
       customerinfo = db.exec("SELECT * FROM users WHERE email='#{session[:email]}'")
       erb :checkout1_prefilled, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal], :customerinfo => customerinfo}
 

@@ -19,7 +19,6 @@
 <%= message %>
 </div></center>
  <div class="content">
-     
                
                             <div class="table-responsive">
                                 <table class="table">
@@ -73,7 +72,8 @@
                                             <th>$10.00</th>
                                         </tr>
                                         <tr>
-                                            <th colspan="5">Order Total</th>
+                                            <th colspan="5">Order Total <br>      <input type="button" value="Print this page" onClick="window.print()">
+</th>
                                             <th>$<%= ordertotal + 10.00 %></th>
                                         </tr>
                                     </tfoot>
