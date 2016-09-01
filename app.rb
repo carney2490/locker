@@ -27,6 +27,7 @@ set :sessions,
 
 def get_order_total()
   order_total = 0.0
+
     if session[:cart]
       session[:cart].each do |item|
         order_total += item["total"]
@@ -320,10 +321,10 @@ end
 post '/update_cart' do
     index = params[:index].to_i
     quantity = params[:quantity].to_i
-    price = session[:cart][index][:price]
+    price =session[:cart][index]["price"]
     total = quantity * price
-    session[:cart][index][:quantity] = quantity
-    session[:cart][index][:total] = total
+    session[:cart][index]["quantity"] = quantity
+    session[:cart][index]["total"] = total
     
     redirect '/shop_cart'
 end

@@ -24,22 +24,6 @@ $('#productPage label').click(function(){
   $('#price').attr("value",price);
 });
 
-// shopping cart
-$('document').ready(function() {
-  var subtotal = 0.00
-  $('.itemTotals').each(function() {
-    var price = parseFloat($(this).html());
-    subtotal += price
-  });
-
-  $('.subtotal').html('$' + subtotal.toFixed(2));
-  
-  var sandh = parseFloat($('.sandh').html());
-  var gtotal = subtotal + sandh
-  
-  $('#gtotal').html('$' + gtotal.toFixed(2));
-});
-
 $('.fa-trash-o').click(function(){
   var index = $(this).attr("data-index");
   $('#deleteFromCart input').attr("value",index);
