@@ -76,10 +76,10 @@
                                             <%= item['line4'] %>
                                         </td>
                                         <td class="text-center">
-                                            $<%=item['price'] %>
+                                            $<%=sprintf "%.2f",item['price'] %>
                                         </td>
                                         <td class="text-center itemTotals">
-                                            $<%=item['total'] %>
+                                            $<%=sprintf "%.2f",item['total'] %>
                                         </td>
                                         <td> 
                                             <i class="fa fa-trash-o" data-index="<%= index %>"></i> 
@@ -90,7 +90,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="5">Total</th>
-                                            <th>$<%= ordertotal %></th>
+                                            <th>$<%=sprintf "%.2f", ordertotal %></th>
                                         </tr>
                                     </tfoot>
                                 </table>
@@ -123,7 +123,7 @@
                             <tbody>
                                 <tr>
                                     <td>Order subtotal</td>
-                                    <th>$<%= ordertotal %></th>
+                                    <th>$<%= sprintf "%.2f",ordertotal %></th>
                                     
 
                                 </tr>
@@ -137,7 +137,7 @@
                                 </tr>
                                 <tr class="total">
                                     <td>Total</td>
-                                    <th>$<%= ordertotal + 10.00 %></th>
+                                    <th>$<%=sprintf "%.2f", ordertotal + 10.00 %></th>
                                 </tr>
                             </tbody>
                         </table>

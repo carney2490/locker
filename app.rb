@@ -123,8 +123,8 @@ post '/customer_register' do
         if check_email.num_tuples.zero? == false
             erb :customer_register, :locals => {:message => " ", :message1 => "That email already exists"}
         else
-            db.exec ("INSERT INTO users (fname, lname, address, city, state, zipcode, email, phone, encrypted_password) 
-                      VALUES ('#{fname}', '#{lname}', '#{address}','#{city}', '#{state}', '#{zipcode}', '#{email}','#{phone}', '#{hash}')" )
+            db.exec ("INSERT INTO users (fname, lname, address, city, state, zipcode, email, phone, encrypted_password,name) 
+                      VALUES ('#{fname}', '#{lname}', '#{address}','#{city}', '#{state}', '#{zipcode}', '#{email}','#{phone}', '#{hash}','#{fname} #{lname}')" )
             erb :success, :locals => {:message => "You have successfully registered.", :message1 => " "}
         end
 end
@@ -319,15 +319,21 @@ post '/add_to_cart' do
 end
 
 post '/update_cart' do
+  def bob 
+    session[:cart].each do
     index = params[:index].to_i
     quantity = params[:quantity].to_i
     price =session[:cart][index]["price"]
     total = quantity * price
     session[:cart][index]["quantity"] = quantity
     session[:cart][index]["total"] = total
-    
+    puts index
+    end
+  end
+  puts bob
     redirect '/shop_cart'
 end
+
 
 post '/remove_from_cart' do
     index = params[:index].to_i

@@ -53,10 +53,10 @@
                                             <%= item['line4'] %>
                                         </td>
                                         <td class="text-center">
-                                            <%=item['price'] %>
+                                            <%=sprintf "%.2f",item['price'] %>
                                         </td>
                                         <td class="text-center itemTotals">
-                                            <%=item['total'] %>
+                                            <%=sprintf "%.2f",item['total'] %>
                                         </td>
                                        
                                     </tr>
@@ -65,7 +65,7 @@
                                     <tfoot>
                                         <tr>
                                             <th colspan="5">SubTotal</th>
-                                            <th>$<%= ordertotal %></th>
+                                            <th>$<%= sprintf "%.2f",ordertotal %></th>
                                         </tr>
                                         <tr>
                                             <th colspan="5">Shipping</th>
@@ -74,7 +74,7 @@
                                         <tr>
                                             <th colspan="5">Order Total <br>      <input type="button" value="Print this page" onClick="window.print()">
 </th>
-                                            <th>$<%= ordertotal + 10.00 %></th>
+                                            <th>$<%= sprintf "%.2f",ordertotal + 10.00 %></th>
                                         </tr>
                                     </tfoot>
                                 </table>

@@ -174,7 +174,7 @@
                             <tbody>
                                 <tr>
                                     <td>Order subtotal</td>
-                                    <th><%= ordertotal%></th>
+                                    <th>$<%= sprintf "%.2f",ordertotal%></th>
 
                                 </tr>
                                 <tr>
@@ -187,7 +187,7 @@
                                 </tr>
                                 <tr class="total">
                                     <td>Total</td>
-                                    <th><%= ordertotal + 10.00%></th>
+                                    <th>$<%=sprintf "%.2f", ordertotal + 10.00%></th>
                                 </tr>
                             </tbody>
                         </table>
