@@ -319,18 +319,16 @@ post '/add_to_cart' do
 end
 
 post '/update_cart' do
-  def bob 
-    session[:cart].each do
+
     index = params[:index].to_i
     quantity = params[:quantity].to_i
     price =session[:cart][index]["price"]
     total = quantity * price
+
+
     session[:cart][index]["quantity"] = quantity
     session[:cart][index]["total"] = total
-    puts index
-    end
-  end
-  puts bob
+    
     redirect '/shop_cart'
 end
 
