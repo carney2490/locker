@@ -123,7 +123,7 @@ post '/customer_register' do
         if check_email.num_tuples.zero? == false
             erb :customer_register, :locals => {:message => " ", :message1 => "That email already exists"}
         else
-            db.exec ("INSERT INTO users (fname, lname, address, city, state, zipcode, email, phone, encrypted_password,name) 
+             db.exec ("INSERT INTO users (fname, lname, address, city, state, zipcode, email, phone, encrypted_password,name) 
                       VALUES ('#{fname}', '#{lname}', '#{address}','#{city}', '#{state}', '#{zipcode}', '#{email}','#{phone}', '#{hash}','#{fname} #{lname}')" )
             erb :success, :locals => {:message => "You have successfully registered.", :message1 => " "}
         end
@@ -143,7 +143,7 @@ post '/facebook' do
     end
     session[:user] = name
     session[:email] = email
-    
+    session[:usertype] = user_type
     redirect '/'   
 end
 
@@ -162,43 +162,44 @@ post '/google' do
     end
     session[:user] = name
     session[:email] = email
+    session[:usertype] = user_type
     redirect '/'   
 end
 
-post '/submit3' do
-    # Standard Log In
-    password = params[:password]
-    email = params[:email]
-    
-    match_login = db.exec("SELECT encrypted_password, user_type, email FROM users WHERE email = '#{email}'")
-    
-        if match_login.num_tuples.zero? == true
-            error = erb :login, :locals => {:message => "invalid email and password combination"}
-            return error
-        end
-    
-    password1 = match_login[0]['encrypted_password']
-    comparePassword = BCrypt::Password.new(password1)
-    user_type = match_login[0]['user_type']
-    email =  match_login[0]['email']
-    
-      if match_login[0]['email'] == email &&  comparePassword == password
-
-     
-      session[:user_type] = user_type
-          session[:email] = email  
-          erb :index
-      else
-      erb :customer_register, :locals => {:message => "invalid username and password combination"}
-      end
-    redirect '/' 
-end
+#post '/submit3' do
+#    # Standard Log In
+#    password = params[:password]
+#    email = params[:email]
+#    
+#    match_login = db.exec("SELECT encrypted_password, user_type, email FROM users WHERE email = '#{email}'")
+#    
+#        if match_login.num_tuples.zero? == true
+#            error = erb :login, :locals => {:message => "invalid email and password combination"}
+#            return error
+#        end
+#    
+#    password1 = match_login[0]['encrypted_password']
+#    comparePassword = BCrypt::Password.new(password1)
+#    user_type = match_login[0]['user_type']
+#    email =  match_login[0]['email']
+#    
+#      if match_login[0]['email'] == email &&  comparePassword == password
+#
+#     
+#      session[:user_type] = user_type
+#          session[:email] = email  
+#          erb :index
+#      else
+#      erb :customer_register, :locals => {:message => "invalid username and password combination"}
+#      end
+#    redirect '/' 
+#end
 
 post '/login' do
     email = params[:email]
     password = params[:password]
-    
-    match_login = db.exec("SELECT encrypted_password,user_type,email,name FROM users WHERE email = '#{email}'")
+    name = params[:name]
+    match_login = db.exec("SELECT encrypted_password,user_type,email,name,fname,lname FROM users WHERE email = '#{email}'")
         if match_login.num_tuples.zero? == true
             error = erb :login, :locals => {:message => "invalid email and password combination"}
             return error
@@ -208,18 +209,18 @@ post '/login' do
     comparePassword = BCrypt::Password.new(password1)
   
     user_email = match_login[0]['email']
-    user_name = match_login[0]['name']
+   name = match_login[0]['name']
     user_type = match_login[0]['user_type']
 
     
       if match_login[0]['email'] == email && comparePassword == password
           session[:email] = user_email  
           session[:usertype] = user_type
-          session[:user] = user_name
+          session[:user] = name
           puts "authenticated"
           erb :index
       else
-      erb :login, :locals => {:message => "invalid username and password combination"}
+      erb :login, :locals => {:message => "invalid username and password combination",:user => session[:user]}
       end 
 end
       
@@ -318,20 +319,19 @@ post '/add_to_cart' do
   
 end
 
+
 post '/update_cart' do
-
-    index = params[:index].to_i
-    quantity = params[:quantity].to_i
-    price =session[:cart][index]["price"]
-    total = quantity * price
-
-
-    session[:cart][index]["quantity"] = quantity
-    session[:cart][index]["total"] = total
-    
+    session[:cart].each_with_index do |shoppingcart_item, cart_index|
+        #item_index = params[index].to_i
+        i = cart_index.to_s.to_sym
+        quantity = params[i].to_i
+        price =session[:cart][cart_index]["price"]
+        total = quantity * price
+        session[:cart][cart_index]["quantity"] = quantity
+        session[:cart][cart_index]["total"] = total
+    end
     redirect '/shop_cart'
 end
-
 
 post '/remove_from_cart' do
     index = params[:index].to_i
@@ -341,8 +341,22 @@ end
 
 get '/checkout1' do
     @title = 'Checkout Step1'
+    "Session email is #{session[:email]}"
+  
+#    if session[:email] == nil
+#      customerinfo = db.exec("SELECT * FROM users WHERE email='#{session[:email]}'")
+#      erb :checkout1_prefilled, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal], :customerinfo => customerinfo}
+#
+#  else
+#      erb :checkout1, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
+#
+#  end
+end
+get '/checkout1_prefilled' do
+    @title = 'Checkout Step1'
+    #"Session email is #{session[:email]}"
    # "Session cart is #{session[:cart]}"
-   if "#{session[:email]}" != ""
+   if session[:email] != nil
       customerinfo = db.exec("SELECT * FROM users WHERE email='#{session[:email]}'")
       erb :checkout1_prefilled, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal], :customerinfo => customerinfo}
 
@@ -431,5 +445,5 @@ get '/receipt' do
     @title = 'Receipt'
    
     erb :receipt,:locals => {:cart => session[:cart],:cart2 => session[:cart2],:ordertotal => session[:ordertotal],:message =>"Thanks for your order, here is a receipt you can print for your records."}
-    
+  
 end
