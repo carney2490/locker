@@ -51,18 +51,17 @@
                                             <%= item['description'] %>
                                         </td>
                                         <td class="text-center">
-                                        <div class="input-group1 spinner">
-                                            <input type="text" name="quantity" class="form-control" value="<%= item['quantity'] %>" min="0" max="500" >
-                                            <div class="input-group-btn-vertical">
-                                            <button class="btn btn-default" type="button"><i class="fa fa-caret-up"></i></button>
-                                            <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
-                                            </div>
-                                        </div>
+                                            <div class="input-group1 spinner">
+    <input type="text" name=<%= index.to_s %> class="form-control" value="<%= item['quantity'] %>" min="0" max="500">
+    <div class="input-group-btn-vertical">
+      <button class="btn btn-default" type="button"onclick="incrementValue()" value="+"><i class="fa fa-caret-up"></i></button>
+      <button class="btn btn-default" type="button"onclick="decrementValue()" value="-" ><i class="fa fa-caret-down"></i></button>
+    </div>
+  </div>
+                                        <td>
+                                            <input type="hidden" name="index" value="<%= index %>">
                                         </td>
-                                       <td>
-                                <!--            <input type="text" name="index" value="">"<%= index %>"
-                                           <input type="text" name="quantity" value="<%= item['quantity'] %>"> -->
-                                       </td>
+                                        
                                         <td class="text-center">
                                             <%= item['size'] %>
                                         </td>
@@ -76,7 +75,7 @@
                                             $<%=sprintf "%.2f",item['price'] %>
                                         </td>
                                         <td class="text-center itemTotals">
-                                            $<%= sprintf "%.2f",item['total'] %>
+                                            $<%=sprintf "%.2f",item['total'] %>
                                         </td>
                                         <td> 
                                             <i class="fa fa-trash-o" data-index="<%= index %>"></i> 
@@ -87,7 +86,7 @@
                                 <tfoot>
                                     <tr>
                                         <th colspan="5">Total</th>
-<th colspan="2" class="text-left">$<%= sprintf "%.2f",ordertotal %></th>
+                                        <th colspan="2" class="text-left">$<%=sprintf "%.2f", ordertotal %></th>
                                     </tr>
                                 </tfoot>
                             </table>
@@ -102,7 +101,7 @@
                             <% if cart != [] %>
                             <div class="pull-right">
                                 <button class="btn btn-default"><i class="fa fa-refresh"></i> Update cart</button>
-                                                                <a href="/checkout1" class="btn btn-default"><i class="btn btn-template-main">></i> Proceed to Checkout </a>
+                                                                <a href="/checkout1_prefilled" class="btn btn-default"><i class="btn btn-template-main">></i> Proceed to Checkout </a>
 
                                 
                             </div>
