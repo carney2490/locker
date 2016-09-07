@@ -447,3 +447,15 @@ get '/receipt' do
     erb :receipt,:locals => {:cart => session[:cart],:cart2 => session[:cart2],:ordertotal => session[:ordertotal],:message =>"Thanks for your order, here is a receipt you can print for your records."}
   
 end
+get '/category_shirts' do
+    @title = 'Shirts'
+    erb :category_shirts
+end
+get '/category_sports' do
+    @title = 'Sports Equipment'
+    erb :category_sports
+end
+get '/category_hats' do
+    @title = 'Hats'
+    erb :category_hats
+end
