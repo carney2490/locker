@@ -143,7 +143,7 @@ post '/facebook' do
     end
     session[:user] = name
     session[:email] = email
-    session[:usertype] = user_type
+    
     redirect '/'   
 end
 
@@ -162,7 +162,7 @@ post '/google' do
     end
     session[:user] = name
     session[:email] = email
-    session[:usertype] = user_type
+    
     redirect '/'   
 end
 
