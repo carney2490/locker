@@ -21,7 +21,7 @@
                 <div class="box">
                     <form method="post" action="/checkout4">
                         <ul class="nav nav-pills nav-justified">
-                            <li><a href="/checkout1"><i class="fa fa-map-marker"></i><br>Address</a>
+                            <li><a href="/checkout1_prefilled"><i class="fa fa-map-marker"></i><br>Address</a>
                             <% cart2.each_with_index do |item,index| %>
                                     <input type="hidden" value='<%= item['firstname']%>' name='firstname'>
                                     <input type="hidden" value='<%= item['lastname']%>' name='lastname'>
