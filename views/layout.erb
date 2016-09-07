@@ -58,12 +58,7 @@ _________________________________________________________ -->
                                 <a href="/shop_cart" class="shopcart" data-animate-hover="pulse"><i class="fa fa-cart-plus"></i></a>
                             </div>
 
-<!--
-                            <div class="login">
-                                <a href="#" data-toggle="modal" data-target="#login-modal"><i class="fa fa-sign-in"></i> <span class="hidden-xs text-uppercase">Sign in</span></a>
-                                <a href="/customer_register"><i class="fa fa-user"></i> <span class="hidden-xs text-uppercase">Sign up</span></a>
-                            </div>
--->
+
 
                         </div>
                     </div>
@@ -112,15 +107,11 @@ _________________________________________________________ -->
                                 <li class="dropdown active">
                                     <a href="javascript: void(0)" class="dropdown-toggle font-style modal_padding" data-toggle="dropdown">Products <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                        <li><a href="/product_details">Shirts</a>
+                                        <li><a href="/category_shirts">Shirts</a>
                                         </li>
-                                        <li><a href="/product_details">Hats</a>
+                                        <li><a href="/category_hats">Hats</a>
                                         </li>
-                                        <li><a href="/product_details">Accessories</a>
-                                        </li>
-                                        <li><a href="/product_details">Shoes</a>
-                                        </li>
-                                        <li><a href="/product_details">Sporting Equipment</a>
+                                        <li><a href="/category_sports">Sporting Equipment</a>
                                         </li>
                                     </ul>
                                 </li>
@@ -144,7 +135,7 @@ _________________________________________________________ -->
                                 </li>                                                    
                                 <li class="font-style">
                                     <% if session[:usertype]=="admin" %>
-                                        <a href="javascript: void(0)"class="dropdown-toggle"data-toggle="dropdown"><%=session[:user] %><b class="caret"></b></a>
+                                        <a href="javascript: void(0)"class="dropdown-toggle"data-toggle="dropdown">Hi, <%=session[:user]%><b class="caret"></b></a>
                                         <ul class="dropdown-menu font-style modal_padding">
                                             <li class=" dropdown active editlink" ></li>
                                             <li> <a href="/edit_profile">Edit Profile</a>
@@ -157,7 +148,7 @@ _________________________________________________________ -->
                                             </li>
                                         </ul>
                                     <% elsif session[:user] %>       
-                                        <a href="javascript: void(0)"class="dropdown-toggle"data-toggle="dropdown"><%=session[:user] %><b class="caret"></b></a>
+                                        <a href="javascript: void(0)"class="dropdown-toggle"data-toggle="dropdown">Hi, <%=session[:user]%><b class="caret"></b></a>
                                         <ul class="dropdown-menu font-style modal_padding">
                                             <li class="dropdown active"></li>       
                                             <li> <a href="/edit_profile">Edit Profile</a></li>
@@ -170,7 +161,8 @@ _________________________________________________________ -->
                                             <a href="#" id='modal-launcher' data-toggle="modal" data-target="#login-modal">Log In</a>
                                         </li>
                                     <% end %>
-                                </li>
+              
+                                
                         <!--/.nav-collapse -->
 
                             <div class="collapse clearfix" id="search">
@@ -237,7 +229,7 @@ _________________________________________________________ -->
                         </div> 
                     </div>	
                         <p class="text-center text-muted">Not registered yet?</p>
-                        <p class="text-center text-muted"><a href="/customer_register"><strong>Register now</strong></a>! It is easy and done in 1&nbsp;minute and gives you access to special discounts and much more!</p>
+                        <p class="text-center text-muted"><a href="/customer_register"><strong>Register now</strong></a>! It is easy and gives you access to special discounts and much more!</p>
                     </div>
                 </div>     
             </div>
@@ -345,11 +337,11 @@ _________________________________________________________ -->
         <script src="https://apis.google.com/js/platform.js" async defer></script>
         <script src="js/facebook.js"></script>
         <script src="js/google.js"></script>
-        <script src="js/pricing.js"></script>
         <script src="js/app.js"></script>
         <!-- owl carousel -->
         <script src="js/owl.carousel.min.js"></script>
         <script src="js/spinner.js"></script>    
         <script src="js/fbshare.js"></script>
+    </div>
     </body>
 </html>
