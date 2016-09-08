@@ -408,12 +408,6 @@ post '/checkout2' do
     erb :checkout2,:locals => {:cart => session[:cart],:customerinfo => session[:customerinfo],:ordertotal => session[:ordertotal],:cart2 => session[:cart2]}
   end
 
-post '/checkout3' do
-    @title = 'Checkout Step3'
-    delivery_method = params[:delivery_method]
-    erb :checkout3,:locals => {:cart => session[:cart],:ordertotal => session[:ordertotal],:delivery_method => delivery_method}
-end
-
 post '/checkout4' do
     @title = 'Checkout Step4'
     firstname = params[:firstname]
@@ -424,10 +418,10 @@ post '/checkout4' do
     zip = params[:zip]
     order_date = Time.now
     delivery_method = params[:delivery_method]
-     puts session[:cart2]
-     puts session[:cart]
-     payment_method = params[:payment_method]
+    payment_method = params[:payment_method]
     order_number = '2'
+    delivery_method = params[:delivery_method]
+
     db.exec("INSERT INTO users(fname,lname,address,city,state,zipcode) 
             VALUES ('#{firstname}','#{lastname}','#{street}','#{city}','#{state}','#{zip}')")
        
@@ -463,7 +457,6 @@ end
 
 get '/paypal' do
 session[:cart] ? cart = session[:cart] : cart = []
-puts session[:cart][0]['productname']
     get_order_total()
   erb :paypal, :locals => {:ordertotal => session[:ordertotal],:cart => cart}
 
