@@ -446,6 +446,7 @@ get '/receipt' do
    
     erb :receipt,:locals => {:cart => session[:cart],:cart2 => session[:cart2],:ordertotal => session[:ordertotal],:message =>"Thanks for your order, here is a receipt you can print for your records."}
   
+  redirect to ('/paypal')
 end
 get '/category_shirts' do
     @title = 'Shirts'
@@ -458,4 +459,12 @@ end
 get '/category_hats' do
     @title = 'Hats'
     erb :category_hats
+end
+
+get '/paypal' do
+session[:cart] ? cart = session[:cart] : cart = []
+puts session[:cart][0]['productname']
+    get_order_total()
+  erb :paypal, :locals => {:ordertotal => session[:ordertotal],:cart => cart}
+
 end
