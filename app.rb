@@ -461,3 +461,15 @@ session[:cart] ? cart = session[:cart] : cart = []
   erb :paypal, :locals => {:ordertotal => session[:ordertotal],:cart => cart}
 
 end
+post '/subscribe' do
+    email= params[:email]
+    check_email = db.exec("SELECT * FROM mailing_list WHERE email = '#{email}'")
+       
+    if
+        check_email.num_tuples.zero? == false
+            erb :mailing_list, :locals => {:message => "You have already joined our mailing list"}
+    else
+         subscribe=db.exec("insert into mailing_list(email)VALUES('#{email}')")
+         erb :mailing_list, :locals => {:message => "Thanks, for joining our mailing list."}
+    end
+end
