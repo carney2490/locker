@@ -1,8 +1,8 @@
 <?php  
 $db = pg_connect("
-    host: "lockerroom.c4iif5msrrmw.us-west-2.rds.amazonaws.com",
-   port:'5432',
-   dbname:'lockerroom',
+    host: ENV['db'],
+   port:ENV['port'],
+   dbname:ENV['dbname'],
    user:ENV['user'],
    password:ENV['password');  
 $query = "INSERT INTO mailing_list VALUES ('$_POST[email]')";  
