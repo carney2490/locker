@@ -377,3 +377,10 @@ text-align: left;
 .teampic {
     max-width:100%;
 }
+.home_button {
+    padding-left: 2.0rem;
+    padding-bottom: 2.0rem;
+}
+.h_button {
+    background-color: #38a7bb;
+}
