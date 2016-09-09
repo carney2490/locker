@@ -289,7 +289,7 @@ get '/shop_cart' do
     session[:cart] ? cart = session[:cart] : cart = []
     get_order_total()
      
-    erb :shop_cart, :locals => {:cart => cart, :ordertotal => session[:ordertotal]}
+    erb :shop_cart, :locals => {:cart => cart, :ordertotal => session[:ordertotal], :name => "",:price => "",:quantity => ""}
    
   
 end
@@ -298,7 +298,8 @@ post '/add_to_cart' do
     @title = 'Shopping Cart'
     
     session[:cart] ||= []
-    
+        session[:cart] ? cart = session[:cart] : cart = []
+
     name = params[:productName]
     description = params[:productDescription]
     url = params[:productURL]
@@ -314,7 +315,7 @@ post '/add_to_cart' do
     session[:cart].push({"productname" => name, "description" => description, "url" => url, "size" => size, "quantity" => quantity, "price" => price, 
                          "total" => total, "line1" => line1, "line2" => line2, "line3" => line3, "line4" => line4})
 
-     redirect '/shop_cart'
+    erb :shop_cart, :locals => {:cart => cart, :ordertotal => session[:ordertotal], :name => name ,:price => price, :quantity => quantity}
 
   
 end
