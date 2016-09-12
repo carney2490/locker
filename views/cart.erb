@@ -1,7 +1,0 @@
-<p><%=cart%></p>
-<p><%=cart[0]%></p>
-<p><%=cart[1]%></p>
-<p><%=cart[1][:item]%></p>
-<% cart.each_with_index do |item,index| %>
-<p><%= item[:item] %> <%= item[:size] %> <%= item[:price] %> <%= index %></p>
-<% end %>

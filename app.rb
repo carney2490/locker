@@ -166,34 +166,6 @@ post '/google' do
     redirect '/'   
 end
 
-#post '/submit3' do
-#    # Standard Log In
-#    password = params[:password]
-#    email = params[:email]
-#    
-#    match_login = db.exec("SELECT encrypted_password, user_type, email FROM users WHERE email = '#{email}'")
-#    
-#        if match_login.num_tuples.zero? == true
-#            error = erb :login, :locals => {:message => "invalid email and password combination"}
-#            return error
-#        end
-#    
-#    password1 = match_login[0]['encrypted_password']
-#    comparePassword = BCrypt::Password.new(password1)
-#    user_type = match_login[0]['user_type']
-#    email =  match_login[0]['email']
-#    
-#      if match_login[0]['email'] == email &&  comparePassword == password
-#
-#     
-#      session[:user_type] = user_type
-#          session[:email] = email  
-#          erb :index
-#      else
-#      erb :customer_register, :locals => {:message => "invalid username and password combination"}
-#      end
-#    redirect '/' 
-#end
 
 post '/login' do
     email = params[:email]
@@ -343,15 +315,6 @@ end
 get '/checkout1' do
     @title = 'Checkout Step1'
     "Session email is #{session[:email]}"
-  
-#    if session[:email] == nil
-#      customerinfo = db.exec("SELECT * FROM users WHERE email='#{session[:email]}'")
-#      erb :checkout1_prefilled, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal], :customerinfo => customerinfo}
-#
-#  else
-#      erb :checkout1, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
-#
-#  end
 end
 get '/checkout1_prefilled' do
     @title = 'Checkout Step1'
@@ -473,4 +436,8 @@ post '/subscribe' do
          subscribe=db.exec("insert into mailing_list(email)VALUES('#{email}')")
          erb :mailing_list, :locals => {:message => "Thanks, for joining our mailing list."}
     end
+end
+get '/category_waynesburg' do
+@title = 'Waynesburg University'
+erb :category_waynesburg
 end
