@@ -261,7 +261,8 @@ get '/shop_cart' do
     session[:cart] ? cart = session[:cart] : cart = []
     get_order_total()
      
-    erb :shop_cart, :locals => {:cart => cart, :ordertotal => session[:ordertotal], :name => "",:price => "",:quantity => "",:size => "",:line1 => "",:line2 => "",:line3 => "", :line4 => "", :url => ""}
+    erb :shop_cart, :locals => {:cart => cart, :ordertotal => session[:ordertotal], :name => "",:price => "",
+                                :quantity => "",:size => "",:line1 => "",:line2 => "",:line3 => "", :line4 => "", :url => ""}
    
   
 end
@@ -284,12 +285,13 @@ post '/add_to_cart' do
     line4 = params[:line4]
     total = quantity * price
         
-    session[:cart].push({"productname" => name, "description" => description, "url" => url, "size" => size, "quantity" => quantity, "price" => price, 
-                         "total" => total, "line1" => line1, "line2" => line2, "line3" => line3, "line4" => line4})
+    session[:cart].push({"productname" => name, "description" => description, "url" => url, "size" => size,
+                         "quantity" => quantity, "price" => price,"total" => total, "line1" => line1,
+                         "line2" => line2, "line3" => line3, "line4" => line4})
 
-    erb :shop_cart, :locals => {:cart => cart, :ordertotal => session[:ordertotal], :name => name ,:price => price, :quantity => quantity, :size => size,:line1 => line1,:line2 => line2,:line3 => line3, :line4 => line4, :url => url}
-
-  
+    erb :shop_cart, :locals => {:cart => cart, :ordertotal => session[:ordertotal], :name => name ,:price => price,
+                                :quantity => quantity,:size => size,:line1 => line1,:line2 => line2,:line3 => line3,
+                                :line4 => line4, :url => url}
 end
 
 
@@ -322,8 +324,8 @@ get '/checkout1_prefilled' do
    # "Session cart is #{session[:cart]}"
    if session[:email] != nil
       customerinfo = db.exec("SELECT * FROM users WHERE email='#{session[:email]}'")
-      erb :checkout1_prefilled, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal], :customerinfo => customerinfo}
-
+      erb :checkout1_prefilled, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal],
+                                            :customerinfo => customerinfo}
   else
       erb :checkout1, :locals => {:cart => session[:cart],:ordertotal => session[:ordertotal]}
 
