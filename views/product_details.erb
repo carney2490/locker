@@ -1,4 +1,15 @@
-<div id="fb-root"></div>
+<head>
+  <meta charset="utf-8">
+  <script>
+    function showDiv(one,second)
+    {
+      document.getElementById(one).style.display = 'block';
+      document.getElementById(second).style.display = 'none';
+      
+    }
+    
+  </script>
+  <div id="fb-root"></div>
 <script>(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
@@ -7,12 +18,7 @@
   fjs.parentNode.insertBefore(js, fjs);
 }(document, 'script', 'facebook-jssdk'));</script>
 
-
-
-
-
-
-
+</head>
 
 <div id="heading-breadcrumbs">
     <div class="container">
@@ -42,29 +48,30 @@
                 <div class="col-sm-6">
                     <div class="box">
                         <form id="productPage" action="/add_to_cart" method="post">
+                <input type="hidden" name="product_url" value="<%=product_info[0]['product_url']%>">
+
                             <div class="sizes">
                                 <h3>Available sizes</h3>
                                 <hr></hr>
                                 <h4>Youth Sizes</h4>
                                 <%size_price.each do |item| %>
                                     <%if item['size'] == "youth small" %>
-                                        <label for="<%=item['size']%>">
-                                            <a href="#">S</a>
-                                            <input type="radio" id="<%=item['size']%>" name="size" value="youth small" class="size-input" data-price="<%=item['price']%>">
-                                        </label>
+                                       <label><a href="#" onClick="showDiv('youth','adult')">S</a>
+                                       <input type="radio" id="<%=item['size']%>" name="size" value="youth small" class="size-input" data-price="<%=item['price']%>">
+</label>
                                     <%elsif item['size'] == "youth medium" %>
-                                        <label for="<%=item['size']%>">
-                                            <a href="#">M</a>
-                                            <input type="radio" id="<%=item['size']%>" name="size" value="youth medium" class="size-input" data-price="<%=item['price']%>">
-                                        </label>
+                                       <label for="<%=item['size']%>" >
+     <a href="#" onClick="showDiv('youth','adult')">M</a>
+      <input type="radio" id="<%=item['size']%>" name="size" value="youth medium" class="size-input" data-price="<%=item['price']%>" onClick="showDiv('youth','adult')">
+      </label>
                                     <%elsif item['size'] == "youth large" %>                       
                                         <label for="<%=item['size']%>">
-                                            <a href="#">L</a>
-                                            <input type="radio" id="<%=item['size']%>" name="size" value="youth large" class="size-input" data-price="<%=item['price']%>">
+                                            <a href="#" onClick="showDiv('youth','adult')">L</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="youth large" class="size-input" data-price="<%=item['price']%>" onClick="showDiv('youth','adult')">
                                         </label>
                                     <%elsif item['size'] == "youth xl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">XL</a>
+                                            <a href="#" onClick="showDiv('youth','adult')">XL</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="youth xl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%else%>
@@ -74,42 +81,42 @@
                                 <%size_price.each do |item| %>
                                     <%if item['size'] == "adult small" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">S</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">S</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult small" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "adult medium" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">M</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">M</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult medium" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "adult large" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">L</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">L</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult large" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "adult xl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">XL</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">XL</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "adult xxl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">2X</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">2X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "adult xxxl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">3X</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">3X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "adult xxxxl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">4X</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">4X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "adult xxxxxl " %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">5X</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">5X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxxxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%else%>
@@ -119,27 +126,27 @@
                                 <%size_price.each do |item| %>
                                     <%if item['size'] == "ladies small" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">S</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">S</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="ladies small" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "ladies medium" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">M</a>
+                                            <a href="#" onClick="showDiv('adult','youth')" >M</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="ladies medium" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "ladies large" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">L</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">L</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="ladies large" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "ladies xl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">XL</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">XL</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="ladies xl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "ladies xxl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#">2X</a>
+                                            <a href="#" onClick="showDiv('adult','youth')">2X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="ladies xxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%else%>
@@ -179,10 +186,26 @@
                                             </p>
                                             </div>
                                             <div class="float_right">
-                        <p id="">Line 1: <input id="line1" name="line1" placeholder="Your custom message" type="text" ></p>
-                        <p id="">Line 2: <input id="line2"  name="line2" placeholder="Your custom message" type="text"></p>
-                        <p id="">Line 3: <input id="line3" name="line3" placeholder="Your custom message" type="text"></p>
-                        <p id="">Line 4: <input id="line4"  name="line4" placeholder="Your custom message" type="text"></p>
+                                            
+                        <p id="youth" style="display:none" >
+                        Line 1: <input id="line1" name="line1" placeholder="Your custom message" type="text" maxlength="12" >
+                        <br>
+                        Line 2: <input id="line2"  name="line2" placeholder="Your custom message" type="text" maxlength="12">
+                        <br>
+                        Line 3: <input id="line3" name="line3" placeholder="Your custom message" type="text" maxlength="12">
+                        <br>
+                        Line 4: <input id="line4"  name="line4" placeholder="Your custom message" type="text" maxlength="12">
+                        </p>
+                        
+                        <p id="adult" style="display:none">
+                        Line 1: <input id="line1" name="line1" placeholder="Your custom message" type="text" maxlength="14" >
+                        <br>
+                        Line 2: <input id="line2"  name="line2" placeholder="Your custom message" type="text" maxlength="14">
+                        <br>
+                        Line 3: <input id="line3" name="line3" placeholder="Your custom message" type="text" maxlength="14">
+                        <br>
+                        Line 4: <input id="line4"  name="line4" placeholder="Your custom message" type="text" maxlength="14">
+                        </p>
                                             </div>
                                     <%end%>
                                 <%end%>
@@ -201,18 +224,18 @@
                     </div>
                 </div>
             </div>
-            <div class="box" id="details">
+            <div class="" id="details">
                 <h4>Order end date and delivery info:</h4>
                 <p><%=product_info[0]['order_information'] %></p>
             </div>
             <div class="box social" id="product-social">
-                <h4>Show it to your friends</h4>
+                 <h4>Show it to your friends</h4>
                         
                            
-	
+    
 
-	<!-- Your share button code -->
-	
+    <!-- Your share button code -->
+    
                             <div class="fb-share-button fbshare" data-href="http://lockerroom123.herokuapp.com/product_details" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Flockerroom123.herokuapp.com%2Fproduct_details&amp;src=sdkpreparse">Share</a></div>
 
                             <a href="https://twitter.com/share?url=URLENCODED_URL&&text=Look what I got from @Locker_Room_WBG"
@@ -223,3 +246,4 @@
                         
             </div>
         </div>
+
