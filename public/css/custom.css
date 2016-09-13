@@ -392,3 +392,6 @@ text-align: left;
     display:none;
     background-color: #38a7bb;
 }
+.fb-share-button {
+    background-color:#38a7bb !important;
+}
