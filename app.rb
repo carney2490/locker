@@ -12,8 +12,8 @@ db_params = {
    host: ENV['db'],
    port:ENV['port'],
    dbname:ENV['dbname'],
-   user:ENV['user'],
-   password:ENV['password'],    
+   user:ENV['dbuser'],
+   password:ENV['dbpassword'],    
 }
 
 db = PG::Connection.new(db_params)
@@ -443,3 +443,39 @@ get '/category_waynesburg' do
 @title = 'Waynesburg University'
 erb :category_waynesburg
 end
+
+get '/send_emails' do
+   subscribers = db.exec("select email from mailing_list")
+
+  erb :subscribers, :locals => {:subscribers => subscribers, :message => ""}
+end 
+
+post '/send_mail_to_list' do
+      subject = params[:subject]
+      subscribers = db.exec("select email from mailing_list")
+      message = params[:message]
+      
+
+      subscribers.each do |email|
+      emails = email["email"]
+  
+    Pony.mail(
+        :to => "#{emails}",
+        :from => 'info@minedminds.org',
+        :subject => "#{subject}", 
+        :content_type => 'text/html', 
+        :body => erb(:send_mailer,:layout=>false,:locals=>{:subject => subject,:message => message}),
+        :via => :smtp, 
+        :via_options => {
+          :address              => 'smtp.gmail.com',
+          :port                 => '587',
+          :enable_starttls_auto => true,
+           :user_name           => ENV['email'],
+           :password            => ENV['email_pass'],
+           :authentication       => :plain, 
+           :domain               => "minedminds-mailinglist.herokuapp.com" 
+        }
+      )
+end
+   erb :subscribers, :locals => {:subscribers => "",:message => "You Sent an email to your list"}
+end 
