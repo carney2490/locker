@@ -1,4 +1,4 @@
-The Locker Room
+Shopping Cart
 
 
 **Plugins used in the template**

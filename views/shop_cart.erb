@@ -8,9 +8,9 @@ window.onload = function(){
 
 <form name="paypal" target="_self" action="https://www.paypal.com/cgi-bin/webscr" method="post">
   <% if url.include?("img/school_logos/jm") %>
-  <input type="hidden" name="shopping_url" value="http://lockerroom123.herokuapp.com/jefferson_morgan_items">
+  <input type="hidden" name="shopping_url" value="http://Shopping Cart123.herokuapp.com/jefferson_morgan_items">
   <% else %>
-    <input type="hidden" name="shopping_url" value="http://lockerroom123.herokuapp.com">
+    <input type="hidden" name="shopping_url" value="http://Shopping Cart123.herokuapp.com">
 <%end%>
   <!-- Identify your business so that you can collect the payments. -->
   <input type="hidden" name="business" value="teecee@minedminds.org">
