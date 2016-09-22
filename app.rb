@@ -37,7 +37,7 @@ def get_order_total()
 end
 
 get '/' do
-    @title = 'Shopping Cart'
+    @title = 'The Locker Room'
     erb :index
 end
 get '/faq' do
@@ -236,12 +236,12 @@ post '/edit_profile' do
 end
 
 get '/jefferson_morgan_items' do
-    @title = 'Shopping Cart'
+    @title = 'Jefferson Morgan Spirit Wear'
     erb :jefferson_morgan_items
 end
 
 post '/jefferson_morgan_items' do
-    @title = 'Shopping Cart'
+    @title = 'Jefferson Morgan Spirit Wear'
     erb :product_details, :locals => {:product_info => product_info, :size_price => size_price}
 end
 
