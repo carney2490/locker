@@ -46,7 +46,7 @@ get '/faq' do
 end
 
 get '/about' do
-    title = 'About'
+    @title = 'About'
     erb :about
 end
 
@@ -236,12 +236,12 @@ post '/edit_profile' do
 end
 
 get '/jefferson_morgan_items' do
-    @title = 'Jefferson Morgan Spirit Wear'
+    @title = 'Example Spirit Wear Order'
     erb :jefferson_morgan_items
 end
 
 post '/jefferson_morgan_items' do
-    @title = 'Jefferson Morgan Spirit Wear'
+    @title = 'Example Spirit Wear Order'
     erb :product_details, :locals => {:product_info => product_info, :size_price => size_price}
 end
 
