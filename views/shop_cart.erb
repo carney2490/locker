@@ -1,12 +1,15 @@
+<!--
 <script>
 window.onload = function(){
   document.forms['paypal'].submit()
 
 }
 </script>
-
-
-<form name="paypal" target="_self" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+-->
+<div class="pgmargin">
+<center>
+<h3> Online ordering coming soon</h3></center>
+<form name="paypal" target="_self" action="/#" method="post">
   <% if url.include?("img/school_logos/jm") %>
   <input type="hidden" name="shopping_url" value="http://Shopping Cart123.herokuapp.com/jefferson_morgan_items">
   <% else %>
@@ -29,6 +32,10 @@ window.onload = function(){
   <input type="hidden" name="cpp_cart_border_color" value="38a7bb">
 </form>
 
+</div>
+<!--
 
-
+<h4 class="center" > Please Wait while we redirect you to paypal's website</h4>
+-->
+<!--https://www.paypal.com/cgi-bin/webscr-->
 <h4 class="center" > Please Wait while we redirect you to paypal's website</h4>
