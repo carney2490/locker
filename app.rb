@@ -235,12 +235,12 @@ post '/edit_profile' do
     redirect '/edit_profile'
 end
 
-get '/jefferson_morgan_items' do
+get '/examplespiritwear' do
     @title = 'Example Spirit Wear Order'
-    erb :jefferson_morgan_items
+    erb :examplespiritwear
 end
 
-post '/jefferson_morgan_items' do
+post '/examplespiritwear' do
     @title = 'Example Spirit Wear Order'
     erb :product_details, :locals => {:product_info => product_info, :size_price => size_price}
 end
@@ -479,3 +479,4 @@ post '/send_mail_to_list' do
 end
    erb :subscribers, :locals => {:subscribers => "",:message => "You Sent an email to your list"}
 end 
+
