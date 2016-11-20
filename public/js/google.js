@@ -6,7 +6,7 @@ function logout()
     function login() 
     {
       var myParams = {
-        'clientid' : '43196386957-l34kni9f94ue44luim5c35tuol47a2jn.apps.googleusercontent.com',
+        'clientid' : '43196386957-l1it8d07eh46uhmmtolaeqdfdu68erca.apps.googleusercontent.com',
         'cookiepolicy' : 'single_host_origin',
         'callback' : 'loginCallback',
         'approvalprompt':'force',
