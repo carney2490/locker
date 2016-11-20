@@ -173,7 +173,7 @@ post '/login' do
     name = params[:name]
     match_login = db.exec("SELECT encrypted_password,user_type,email,name,fname,lname FROM users WHERE email = '#{email}'")
         if match_login.num_tuples.zero? == true
-            error = erb :login, :locals => {:message => "invalid email and password combination"}
+            error = erb :login, :locals => {:message => "invalid email and password combination",:user => session[:user]}
             return error
         end
     
