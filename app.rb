@@ -7,7 +7,7 @@ require 'pg'
 require 'mail'
 require 'pp'
 load "./local_env.rb" if File.exists?("./local_env.rb")
-
+enable :sessions
 db_params = {
    host: ENV['db'],
    port:ENV['port'],
@@ -18,12 +18,7 @@ db_params = {
 
 db = PG::Connection.new(db_params)
 
-set :sessions, 
-  key: ENV['sessionkey'],
-  domain:  ENV['domain'],
-  path: '/',
-  expire_after: 3600,
-  secret: ENV['sessionsecret']
+
 
 def get_order_total()
   order_total = 0.0
