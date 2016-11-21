@@ -368,6 +368,7 @@ text-align: left;
 }
 .success_message {
     padding-left:2.0rem;
+    margin-bottom: 40rem;
 }
 .checkout_finished {
     padding-left:2.0rem;
