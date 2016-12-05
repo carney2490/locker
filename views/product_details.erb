@@ -63,24 +63,24 @@ function validateForm(){
 
                             <div class="sizes">
                                 <h3>Available sizes</h3>
-                                <hr></hr>
+                                <hr> </hr>
                                 <h4>Youth Sizes</h4>
                                 <%size_price.each do |item| %>
-                                    <%if item['size'] == "youth small" %>
+                                    <%if item['size'] == "1youth small" %>
                                        <label><a href="#" onClick="showDiv('youth','adult')">S</a>
                                        <input type="radio" id="<%=item['size']%>" name="size" value="youth small" class="size-input" data-price="<%=item['price']%>">
 </label>
-                                    <%elsif item['size'] == "youth medium" %>
+                                    <%elsif item['size'] == "2youth medium" %>
                                        <label for="<%=item['size']%>" >
      <a href="#" onClick="showDiv('youth','adult')">M</a>
       <input type="radio" id="<%=item['size']%>" name="size" value="youth medium" class="size-input" data-price="<%=item['price']%>" onClick="showDiv('youth','adult')">
       </label>
-                                    <%elsif item['size'] == "youth large" %>                       
+                                    <%elsif item['size'] == "3youth large" %>                       
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('youth','adult')">L</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="youth large" class="size-input" data-price="<%=item['price']%>" onClick="showDiv('youth','adult')">
                                         </label>
-                                    <%elsif item['size'] == "youth xl" %>
+                                    <%elsif item['size'] == "4youth xl" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('youth','adult')">XL</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="youth xl" class="size-input" data-price="<%=item['price']%>">
@@ -90,42 +90,42 @@ function validateForm(){
                                 <%end%>
                                 <h4>Adult Sizes</h4>
                                 <%size_price.each do |item| %>
-                                    <%if item['size'] == "adult small" %>
+                                    <%if item['size'] == "1adult small" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('adult','youth')">S</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult small" class="size-input" data-price="<%=item['price']%>">
                                         </label>
-                                    <%elsif item['size'] == "adult medium" %>
+                                    <%elsif item['size'] == "2adult medium" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('adult','youth')">M</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult medium" class="size-input" data-price="<%=item['price']%>">
                                         </label>
-                                    <%elsif item['size'] == "adult large" %>
+                                    <%elsif item['size'] == "3adult large" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('adult','youth')">L</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult large" class="size-input" data-price="<%=item['price']%>">
                                         </label>
-                                    <%elsif item['size'] == "adult xl" %>
+                                    <%elsif item['size'] == "4adult xl" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('adult','youth')">XL</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
-                                    <%elsif item['size'] == "adult xxl" %>
+                                    <%elsif item['size'] == "5adult xxl" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('adult','youth')">2X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
-                                    <%elsif item['size'] == "adult xxxl" %>
+                                    <%elsif item['size'] == "6adult xxxl" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('adult','youth')">3X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
-                                    <%elsif item['size'] == "adult xxxxl" %>
+                                    <%elsif item['size'] == "7adult xxxxl" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('adult','youth')">4X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
-                                    <%elsif item['size'] == "adult xxxxxl " %>
+                                    <%elsif item['size'] == "8adult xxxxxl " %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('adult','youth')">5X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxxxl" class="size-input" data-price="<%=item['price']%>">
@@ -133,9 +133,10 @@ function validateForm(){
                                     <%else%>
                                     <%end%>
                                 <%end%>
+<!--
                                 <h4>Ladies</h4>
                                 <%size_price.each do |item| %>
-                                    <%if item['size'] == "ladies small" %>
+                                    <%if item['size'] == "1ladies small" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('adult','youth')">S</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="ladies small" class="size-input" data-price="<%=item['price']%>">
@@ -163,6 +164,8 @@ function validateForm(){
                                     <%else%>
                                     <%end%>
                                 <%end%>
+-->
+                           
                             </div>
                             <div class="row quantity">
                                 <div class="ib">
@@ -199,23 +202,17 @@ function validateForm(){
                                             <div class="float_right">
                                             
                         <p id="youth" style="display:none" >
-                        Line 1: <input id="line1" name="line1" placeholder="Your custom message" type="text" maxlength="12" >
+                        Line 1: <input id="line1" name="line1" placeholder="Your name" type="text" maxlength="12" >
                         <br>
-                        Line 2: <input id="line2"  name="line2" placeholder="Your custom message" type="text" maxlength="12">
+                        Line 2: <input id="line2"  name="line2" placeholder="Your number" type="text" maxlength="12">
                         <br>
-                        Line 3: <input id="line3" name="line3" placeholder="Your custom message" type="text" maxlength="12">
-                        <br>
-                        Line 4: <input id="line4"  name="line4" placeholder="Your custom message" type="text" maxlength="12">
                         </p>
                         
                         <p id="adult" style="display:none">
-                        Line 1: <input id="line1" name="line1" placeholder="Your custom message" type="text" maxlength="14" >
+                        Line 1: <input id="line1" name="line1" placeholder="Your name" type="text" maxlength="14" >
                         <br>
-                        Line 2: <input id="line2"  name="line2" placeholder="Your custom message" type="text" maxlength="14">
+                        Line 2: <input id="line2"  name="line2" placeholder="Your number" type="text" maxlength="14">
                         <br>
-                        Line 3: <input id="line3" name="line3" placeholder="Your custom message" type="text" maxlength="14">
-                        <br>
-                        Line 4: <input id="line4"  name="line4" placeholder="Your custom message" type="text" maxlength="14">
                         </p>
                                             </div>
                                     <%end%>
