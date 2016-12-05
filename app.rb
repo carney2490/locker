@@ -7,7 +7,7 @@ require 'pg'
 require 'mail'
 require 'pp'
 load "./local_env.rb" if File.exists?("./local_env.rb")
-enable :sessions
+
 db_params = {
    host: ENV['db'],
    port:ENV['port'],
@@ -18,7 +18,12 @@ db_params = {
 
 db = PG::Connection.new(db_params)
 
-
+set :sessions, 
+  key: ENV['sessionkey'],
+  domain:  ENV['domain'],
+  path: '/',
+  expire_after: 3600,
+  secret: ENV['sessionsecret']
 
 def get_order_total()
   order_total = 0.0
@@ -168,7 +173,7 @@ post '/login' do
     name = params[:name]
     match_login = db.exec("SELECT encrypted_password,user_type,email,name,fname,lname FROM users WHERE email = '#{email}'")
         if match_login.num_tuples.zero? == true
-            error = erb :login, :locals => {:message => "invalid email and password combination",:user => session[:user]}
+            error = erb :login, :locals => {:message => "Invalid email and password combination",:user => session[:user]}
             return error
         end
     
@@ -187,7 +192,7 @@ post '/login' do
           puts "authenticated"
           erb :index
       else
-      erb :login, :locals => {:message => "invalid username and password combination",:user => session[:user]}
+      erb :login, :locals => {:message => "Invalid username and password combination",:user => session[:user]}
       end 
 end
       
@@ -243,7 +248,7 @@ end
 post '/product_details' do
     url = params[ :url]
     
-    size_price = db.exec("SELECT size, price FROM products2 WHERE product_url = '#{url}' ORDER BY size ASC  ")
+    size_price = db.exec("SELECT size, price FROM products2 WHERE product_url = '#{url}' ORDER BY size Asc")
     
     product_info = db.exec("SELECT product_name, product_description, order_information, product_url, personalization FROM products2 WHERE product_url = '#{url}' LIMIT 1")
     
@@ -475,3 +480,6 @@ end
    erb :subscribers, :locals => {:subscribers => "",:message => "You Sent an email to your list"}
 end 
 
+get '/margaretbellmiller' do
+    erb :margaretbellmiller
+end
