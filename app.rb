@@ -40,6 +40,7 @@ get '/' do
     @title = 'The Locker Room'
     erb :index
 end
+
 get '/faq' do
     @title = 'FAQ'
     erb :faq
@@ -54,6 +55,7 @@ get '/contact' do
     @title = 'Contact Us'
     erb :contact
 end
+
 Mail.defaults do
   delivery_method :smtp, 
   address: "email-smtp.us-east-1.amazonaws.com", 
@@ -95,8 +97,6 @@ get '/customer_order' do
     @title = 'Orders'
     erb :customer_order
 end
-
-
 
 get '/customer_register' do
     @title = 'Register'
@@ -212,6 +212,7 @@ get '/admin_page' do
    
     erb :admin_page,:locals =>{:mailing_list => mailing_list}
 end
+
 get '/edit_profile'do
     @title = 'Edit Profile'
     users = db.exec("SELECT * FROM users WHERE email='#{session[:email]}'")
