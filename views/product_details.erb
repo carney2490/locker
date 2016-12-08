@@ -133,38 +133,6 @@ function validateForm(){
                                     <%else%>
                                     <%end%>
                                 <%end%>
-<!--
-                                <h4>Ladies</h4>
-                                <%size_price.each do |item| %>
-                                    <%if item['size'] == "1ladies small" %>
-                                        <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">S</a>
-                                            <input type="radio" id="<%=item['size']%>" name="size" value="ladies small" class="size-input" data-price="<%=item['price']%>">
-                                        </label>
-                                    <%elsif item['size'] == "ladies medium" %>
-                                        <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')" >M</a>
-                                            <input type="radio" id="<%=item['size']%>" name="size" value="ladies medium" class="size-input" data-price="<%=item['price']%>">
-                                        </label>
-                                    <%elsif item['size'] == "ladies large" %>
-                                        <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">L</a>
-                                            <input type="radio" id="<%=item['size']%>" name="size" value="ladies large" class="size-input" data-price="<%=item['price']%>">
-                                        </label>
-                                    <%elsif item['size'] == "ladies xl" %>
-                                        <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">XL</a>
-                                            <input type="radio" id="<%=item['size']%>" name="size" value="ladies xl" class="size-input" data-price="<%=item['price']%>">
-                                        </label>
-                                    <%elsif item['size'] == "ladies xxl" %>
-                                        <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">2X</a>
-                                            <input type="radio" id="<%=item['size']%>" name="size" value="ladies xxl" class="size-input" data-price="<%=item['price']%>">
-                                        </label>
-                                    <%else%>
-                                    <%end%>
-                                <%end%>
--->
 
                             </div>
                             <div class="row quantity">
@@ -190,66 +158,34 @@ function validateForm(){
                                         <div class="">
                                             <p class="float_left">
                                                 <label for="personalize">
-                                                    <h3 class="personalize_headline">Personalization
-                                                    <input type="checkbox" name="personalize" name="personalize" value="personalize" class="size-input"></h3>
+                                                    <h3 class="personalize_headline">Personalization</h3>
+                                                    <!-- <input type="checkbox" name="personalize" name="personalize" value="personalize" class="size-input"></h3> -->
 
 
                                                     <h4>*Items are printed <mark>EXACTLY</mark> how you enter the text!(Including capital lettering & punctuation!)*</h4>
-                                                    <h6>*Adult:14 characters per line*<br>
-                                                        *Youth:12 characters per line*</h6>
+                                                    <h6>*Adult: max 14 characters per line*<br>
+                                                        *Youth: max 12 characters per line*</h6>
                                                 </label>
                                             </p>
                                             </div>
                                             <div class="float_right">
-                                              <div id="wrap">
-<form action="" id="personalize" onsubmit="return false;">
-                        <p id="youth" style="display:none" >
-                          <label class="inlinelabel" for='includeName'>
-                              Include Name($3.00)</label>
-                              <input type="checkbox" id="includeName"
-                              name="includeName" onclick="calculateTotal()" />
-
-                              <input type="text"  id="line1"
-                              name="line1"  maxlength="12" />
 
 
-                              <label class="inlinelabel" for='includeNumber'>
-                                Include Number($2.00)</label>
-                              <input type="checkbox" id="includeNumber"
-                                name="includeNumber" onclick="calculateTotal()" />
 
-                              <input type="text"  id="line2"
-                                name="line2"  maxlength="12"  />
-                              </p>
-                              <div id="totalPrice"></div>
+                                              <p id="youth" style="display:none" >
+                                            Add Name (+ $3.00): <input id="line1" name="youth_name" placeholder="Your name" type="text" maxlength="12" >
+                                            <br>
+                                            Add Number (+ $2.00): <input id="line2"  name="youth_number" placeholder="Your number" type="text" maxlength="12">
+                                            <br>
+                                            </p>
 
-                        <!-- Line 1: <input id="line1" name="line1" placeholder="Your name" type="text" maxlength="12" >
-                        <br> -->
-                        <!-- Line 2: <input id="line2"  name="line2" placeholder="Your number" type="text" maxlength="12">
-                        <br>
-                        </p> -->
+                                            <p id="adult" style="display:none">
+                                            Add Name (+ $3.00): <input id="line1" name="adult_name" placeholder="Your name" type="text" maxlength="14" >
+                                            <br>
+                                            Add Number (+ $2.00): <input id="line2"  name="adult_number" placeholder="Your number" type="text" maxlength="14">
+                                            <br>
+                                            </p>
 
-                        <p id="adult" style="display:none">
-                          <label class="inlinelabel" for='includename'>
-                              Include Name($3.00)</label>
-                              <input type="checkbox" id="includename"
-                              name="includename" onclick="calculateTotal()" />
-                              <input type="text"  id="line1"
-                              name="line1"  maxlength="14" />
-                              <label class="inlinelabel" for='includenumber'>
-                                Include Number($2.00)</label>
-                              <input type="checkbox" id="includenumber"
-                                name="includenumber" onclick="calculateTotal()" />
-
-                              <input type="text"  id="line2"
-                                name="line2" maxlength="14"  />
-                              </p>
-                              <div id="totalPrice"></div>
-                        <!-- Line 1: <input id="line1" name="line1" placeholder="Your name" type="text" maxlength="14" >
-                        <br>
-                        Line 2: <input id="line2"  name="line2" placeholder="Your number" type="text" maxlength="14">
-                        <br> -->
-</div>
                                             </div>
                                     <%end%>
                                 <%end%>
