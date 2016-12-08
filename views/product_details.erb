@@ -5,9 +5,9 @@
     {
       document.getElementById(one).style.display = 'block';
       document.getElementById(second).style.display = 'none';
-      
+
     }
-    
+
   </script>
   <div id="fb-root"></div>
 <script>(function(d, s, id) {
@@ -75,7 +75,7 @@ function validateForm(){
      <a href="#" onClick="showDiv('youth','adult')">M</a>
       <input type="radio" id="<%=item['size']%>" name="size" value="youth medium" class="size-input" data-price="<%=item['price']%>" onClick="showDiv('youth','adult')">
       </label>
-                                    <%elsif item['size'] == "3youth large" %>                       
+                                    <%elsif item['size'] == "3youth large" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('youth','adult')">L</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="youth large" class="size-input" data-price="<%=item['price']%>" onClick="showDiv('youth','adult')">
@@ -165,7 +165,7 @@ function validateForm(){
                                     <%end%>
                                 <%end%>
 -->
-                           
+
                             </div>
                             <div class="row quantity">
                                 <div class="ib">
@@ -192,28 +192,64 @@ function validateForm(){
                                                 <label for="personalize">
                                                     <h3 class="personalize_headline">Personalization
                                                     <input type="checkbox" name="personalize" name="personalize" value="personalize" class="size-input"></h3>
+
+
                                                     <h4>*Items are printed <mark>EXACTLY</mark> how you enter the text!(Including capital lettering & punctuation!)*</h4>
-                                                <h5>*Adult:14 characters per line*<br>
-                                                    *Youth:12 characters per line*</h5> 
-                                                   
+                                                    <h6>*Adult:14 characters per line*<br>
+                                                        *Youth:12 characters per line*</h6>
                                                 </label>
                                             </p>
                                             </div>
                                             <div class="float_right">
-                                            
+                                              <div id="wrap">
+<form action="" id="personalize" onsubmit="return false;">
                         <p id="youth" style="display:none" >
-                        Line 1: <input id="line1" name="line1" placeholder="Your name" type="text" maxlength="12" >
+                          <label class="inlinelabel" for='includeName'>
+                              Include Name($3.00)</label>
+                              <input type="checkbox" id="includeName"
+                              name="includeName" onclick="calculateTotal()" />
+
+                              <input type="text"  id="line1"
+                              name="line1"  maxlength="12" />
+
+
+                              <label class="inlinelabel" for='includeNumber'>
+                                Include Number($2.00)</label>
+                              <input type="checkbox" id="includeNumber"
+                                name="includeNumber" onclick="calculateTotal()" />
+
+                              <input type="text"  id="line2"
+                                name="line2"  maxlength="12"  />
+                              </p>
+                              <div id="totalPrice"></div>
+
+                        <!-- Line 1: <input id="line1" name="line1" placeholder="Your name" type="text" maxlength="12" >
+                        <br> -->
+                        <!-- Line 2: <input id="line2"  name="line2" placeholder="Your number" type="text" maxlength="12">
                         <br>
-                        Line 2: <input id="line2"  name="line2" placeholder="Your number" type="text" maxlength="12">
-                        <br>
-                        </p>
-                        
+                        </p> -->
+
                         <p id="adult" style="display:none">
-                        Line 1: <input id="line1" name="line1" placeholder="Your name" type="text" maxlength="14" >
+                          <label class="inlinelabel" for='includename'>
+                              Include Name($3.00)</label>
+                              <input type="checkbox" id="includename"
+                              name="includename" onclick="calculateTotal()" />
+                              <input type="text"  id="line1"
+                              name="line1"  maxlength="14" />
+                              <label class="inlinelabel" for='includenumber'>
+                                Include Number($2.00)</label>
+                              <input type="checkbox" id="includenumber"
+                                name="includenumber" onclick="calculateTotal()" />
+
+                              <input type="text"  id="line2"
+                                name="line2" maxlength="14"  />
+                              </p>
+                              <div id="totalPrice"></div>
+                        <!-- Line 1: <input id="line1" name="line1" placeholder="Your name" type="text" maxlength="14" >
                         <br>
                         Line 2: <input id="line2"  name="line2" placeholder="Your number" type="text" maxlength="14">
-                        <br>
-                        </p>
+                        <br> -->
+</div>
                                             </div>
                                     <%end%>
                                 <%end%>
@@ -238,20 +274,19 @@ function validateForm(){
             </div>
             <div class="box social" id="product-social">
                  <h4>Show it to your friends</h4>
-                        
-                           
-    
+
+
+
 
     <!-- Your share button code -->
-    
+
                             <div class="fb-share-button fbshare" data-href="http://Shopping Cart123.herokuapp.com/product_details" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2FShopping Cart123.herokuapp.com%2Fproduct_details&amp;src=sdkpreparse">Share</a></div>
 
                             <a href="https://twitter.com/share?url=URLENCODED_URL&&text=Look what I got from @Locker_Room_WBG"
    onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=300,width=600');return false;"
    target="_blank" title="Share on Twitter" class="" ><i class="fa fa-twitter "></i></a>
-                
+
                             <a href="mailto:?subject= Look what I'm getting from Shopping Cart &body= If you like this you can get one too.Hurry before the sale is over." class="email" ><i class="fa fa-envelope "></i></a>
-                        
+
             </div>
         </div>
-
