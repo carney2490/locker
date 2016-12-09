@@ -24,10 +24,9 @@ window.onload = function(){
   <input type="hidden" name="quantity" value="<%=quantity%>">
 
   <!-- Specify details about the item that buyers will purchase. -->
-  <input type="hidden" name="item_name" value="<%=size%> <%=name%> <%=line1%> <%=line2%> <%=line3%>    <%=line4%>">
+  <input type="hidden" name="item_name" value="Item: <%=name%>; Size: <%=size%>; Personalization: <%=line1%> <%=line2%> <%=line3%> <%=line4%>">
   <input type="hidden" name="amount" value="<%=price%>">
   <input type="hidden" name="currency_code" value="USD">
-  <input type="hidden" name="handling_cart" value="<%=fee%>">
   <input type="hidden" name="cpp_headerborder_color" value="38a7bb" >
   <input type="hidden" name="cpp_cart_border_color" value="38a7bb">
 </form>
