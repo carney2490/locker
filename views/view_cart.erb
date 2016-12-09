@@ -1,0 +1,21 @@
+
+<script>
+window.onload = function(){
+  document.forms['paypal'].submit()
+
+}
+</script>
+
+<div class="pgmargin">
+<center>
+<h4 class="center" > Please Wait while we redirect you to paypal's website</h4>
+<form name="paypal" target="_self" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+  <input type="hidden" name="shopping_url" value=<%=domain%>>
+  <input type="hidden" name="cmd" value="_cart" />
+ <input type="hidden" name="display" value="1" />
+ <input type="hidden" name="business" value="info@lockerroomwbg.com" />
+ <input type="hidden" name="lc" value="US" />
+ <input type="hidden" name="charset" value="windows-1252" />
+</form>
+
+</div>

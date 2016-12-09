@@ -258,6 +258,7 @@ class App < Sinatra::Base
     line2 = params[:youth_number] || ""
     line3 = params[:adult_name] || ""
     line4 = params[:adult_number] || ""
+    path = ENV['domain'] + "/wchsgirlsbasketball"
 
     #additional personalization fee
     if line1.length > 0 || line3.length > 0
@@ -269,7 +270,12 @@ class App < Sinatra::Base
 
     erb :shop_cart, :locals => {:name => name ,:price => price,
                                 :quantity => quantity,:size => size,:line1 => line1,:line2 => line2,:line3 => line3,
-                                :line4 => line4, :url => url}
+                                :line4 => line4, :url => url, :domain => path}
+  end
+
+  post '/view_cart' do
+    path = ENV['domain'] + "/wchsgirlsbasketball"
+    erb :view_cart, :locals => {:domain => path}
   end
 
   #****ADMIN FUNCTIONALITY****
@@ -312,4 +318,5 @@ class App < Sinatra::Base
     end
     erb :subscribers, :locals => {:subscribers => "",:message => "You Sent an email to your list"}
   end
+
 end

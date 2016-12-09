@@ -11,12 +11,12 @@ window.onload = function(){
 <h4 class="center" > Please Wait while we redirect you to paypal's website</h4>
 <form name="paypal" target="_self" action="https://www.paypal.com/cgi-bin/webscr" method="post">
   <% if url.include?("img/school_logos/mbm") %>
-  <input type="hidden" name="shopping_url" value="http://localhost:4567/wchsgirlsbasketball">
+  <input type="hidden" name="shopping_url" value=<%=domain%>>
   <% else %>
     <input type="hidden" name="shopping_url" value="http://Shopping Cart123.herokuapp.com">
 <%end%>
   <!-- Identify your business so that you can collect the payments. -->
-  <input type="hidden" name="business" value="teecee@minedminds.org">
+  <input type="hidden" name="business" value="info@lockerroomwbg.com">
 
   <!-- Specify a PayPal Shopping Cart Add to Cart button. -->
   <input type="hidden" name="cmd" value="_cart">
@@ -24,7 +24,7 @@ window.onload = function(){
   <input type="hidden" name="quantity" value="<%=quantity%>">
 
   <!-- Specify details about the item that buyers will purchase. -->
-  <input type="hidden" name="item_name" value="Item: <%=name%>; Size: <%=size%>; Personalization: <%=line1%> <%=line2%> <%=line3%> <%=line4%>">
+  <input type="hidden" name="item_name" value="Campaign: WCHS Girls Basketball; Item: <%=name%>; Size: <%=size%>; Personalization: <%=line1%> <%=line2%> <%=line3%> <%=line4%>">
   <input type="hidden" name="amount" value="<%=price%>">
   <input type="hidden" name="currency_code" value="USD">
   <input type="hidden" name="cpp_headerborder_color" value="38a7bb" >
