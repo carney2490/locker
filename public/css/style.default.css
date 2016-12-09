@@ -2943,7 +2943,7 @@ fieldset[disabled] .btn-template-primary.active {
   padding: 9px 10px;
   margin-top: 14px;
   margin-bottom: 14px;
-  background-color: transparent;
+  background-color: #e7e7e7;
   background-image: none;
   border: 1px solid transparent;
   border-radius: 0;
