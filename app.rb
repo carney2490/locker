@@ -6,6 +6,8 @@ require 'pony'
 require 'pg'
 require 'mail'
 require 'pp'
+require 'date'
+require_relative 'helpers.rb'
 load "./local_env.rb" if File.exists?("./local_env.rb")
 
 class App < Sinatra::Base
@@ -228,14 +230,20 @@ class App < Sinatra::Base
   end
 
   #****FUNDRAISERS****
-  get '/examplespiritwear' do
-    @title = 'Example Spirit Wear Order'
-    erb :examplespiritwear
+
+  get '/campaigns' do
+    @title = 'Spirit Wear Campaigns'
+    campaigns = db.exec("SELECT campaign_name, start_date, end_date, contact_name, contact_email FROM campaigns")
+    date = DateTime.now
+    sorted_campaigns = sort_campaigns(campaigns, date)
+    erb :campaigns, :locals => {:active_campaigns => sorted_campaigns[:active_campaigns], :future_campaigns => sorted_campaigns[:future_campaigns], :past_campaigns => sorted_campaigns[:past_campaigns]}
   end
 
-  get '/wchsgirlsbasketball' do
-    @title = 'WCHS Girls Basketball'
-    erb :wchsgirlsbasketball
+  post '/campaigns' do
+    campaign_name = params[:campaign_name]
+    end_date = params[:end_date]
+    items = db.exec("SELECT item FROM campaign_items WHERE campaign_name='#{campaign_name}'")
+    erb :campaign_order, :locals => {:campaign_name => campaign_name, :end_date => end_date, :items => items}
   end
 
   #****ORDERING****
@@ -274,7 +282,7 @@ class App < Sinatra::Base
   end
 
   post '/view_cart' do
-    path = ENV['domain'] + "/wchsgirlsbasketball"
+    path = ENV['domain'] + "/campaigns"
     erb :view_cart, :locals => {:domain => path}
   end
 

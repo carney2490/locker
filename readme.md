@@ -1,26 +1,15 @@
-Shopping Cart
+To add new campaigns:
 
+STEP 1: can use future dates
 
-**Plugins used in the template**
+a) Add to campaigns table: campaign_name, start_date, end_date, contact_name, contact_email
+b) Add 200x200px logo in img/campaigns/<campaign name>/logo.jpg (remove any spaces and hyphens from the file name). If you don't have logo yet then copy the default one in the campaign folder.
 
-- Owl Carousel ([http://www.owlgraphic.com/owlcarousel/](http://www.owlgraphic.com/owlcarousel/))
-- jQuery Counter Up ([https://github.com/bfintal/Counter-Up](https://github.com/bfintal/Counter-Up))
-- jQuery Waypoints ([http://imakewebthings.com/jquery-waypoints/](http://imakewebthings.com/jquery-waypoints/))
-- animate.css ([http://daneden.github.io/animate.css/](http://daneden.github.io/animate.css/))
-- Modernizr ([http://modernizr.com/](http://modernizr.com/)) 
-- jQuery scrollTo ([http://demos.flesler.com/jquery/scrollTo/](http://demos.flesler.com/jquery/scrollTo/))
-- gmaps.js ([http://hpneo.github.io/gmaps/](http://hpneo.github.io/gmaps/))
+STEP 2: Before the start date
 
-**Fonts used in the template**
+a) add to campaign_items table: campaign_name, item (these are t-shirts, sweatpants, etc)
+b) add 400x400px images to img/campaigns/<campaign name>/ folder. Call the images the same as the item names (without spaces and hyphens)
 
-- Roboto ([https://www.google.com/fonts/specimen/Roboto](https://www.google.com/fonts/specimen/Roboto))
+STEP 3: To enable ordering. nb this part still requires refactoring prior to next campaign
 
-
-
-
-
-
-
-
-
-
+a) add to products table: campaign_name, item, item_description, size, price, personalize_name, personalize_number 
