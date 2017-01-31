@@ -240,10 +240,10 @@ class App < Sinatra::Base
   end
 
   post '/campaigns' do
-    campaign_name = params[:campaign_name]
+    session[:campaign_name] = params[:campaign_name]
     end_date = params[:end_date]
-    items = db.exec("SELECT item FROM campaign_items WHERE campaign_name='#{campaign_name}'")
-    erb :campaign_order, :locals => {:campaign_name => campaign_name, :end_date => end_date, :items => items}
+    items = db.exec("SELECT item FROM campaign_items WHERE campaign_name='#{session[:campaign_name]}'")
+    erb :campaign_order, :locals => {:campaign_name => session[:campaign_name], :end_date => end_date, :items => items}
   end
 
   #****ORDERING****
@@ -261,13 +261,13 @@ class App < Sinatra::Base
     url = params[:productURL]
     size = params[:size]
     quantity = params[:quantity].to_i
+    color = params[:color]
     price = params[:price].to_f + 0.75 #hardcoded convenience fee addition
     line1 = params[:youth_name] || ""
     line2 = params[:youth_number] || ""
     line3 = params[:adult_name] || ""
     line4 = params[:adult_number] || ""
-    path = ENV['domain'] + "/wchsgirlsbasketball"
-
+    path = ENV['domain'] + '#{session[:campaign_name]}'
     #additional personalization fee
     if line1.length > 0 || line3.length > 0
       price += 3.00
@@ -278,7 +278,7 @@ class App < Sinatra::Base
 
     erb :shop_cart, :locals => {:name => name ,:price => price,
                                 :quantity => quantity,:size => size,:line1 => line1,:line2 => line2,:line3 => line3,
-                                :line4 => line4, :url => url, :domain => path}
+                                :line4 => line4, :url => url, :domain => path, :campaign_name =>session[:campaign_name],:color => color}
   end
 
   post '/view_cart' do

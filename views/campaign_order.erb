@@ -12,7 +12,8 @@
 <div class="container mt1">
 	<% image_folder = "img/campaigns/" + campaign_name.delete(" ") + "/" %>
 	<% items.each do |item| %>
-		<% image = image_folder + item['items'].delete(" ").delete("-") + ".jpg"%>
+    
+		<% image = image_folder + item['item'].delete(" ").delete("-") + ".jpg"%>
 		<form method='post' action='product_details'>	
 			<input type="hidden" name="url" value=<%= image %>>	
 			<div class="col-md-3 trelement">

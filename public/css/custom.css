@@ -1,5 +1,7 @@
 /* your styles go here */
-
+.color_margin{
+    padding-left:25px;
+}
 .facebook_login {
     width:30%;
 }

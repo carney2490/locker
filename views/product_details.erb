@@ -54,7 +54,12 @@ function validateForm(){
                 <div class="col-sm-6">
                     <div id="mainImage">
                         <center><img src="<%=product_info[0]['product_url']%>" alt="" class="img-responsive"></center>
-                    </div>
+                        </div>
+                        <p>*Product is available in other colors.</p>
+                        <p>*Gray shirt comes with purple/black print.</p>
+                        <p>*Black shirts come with purple/white print.</p> <img src="/img/campaigns/ThunderFastpitch/black.jpg" class="img-responsive">
+                        <p>*Purple shirts come with black/white print.</p><img src="/img/campaigns/ThunderFastpitch/purple.jpg" class="img-responsive">
+                    
                 </div>
                 <div class="col-sm-6">
                     <div class="box">
@@ -137,7 +142,7 @@ function validateForm(){
                             </div>
                             <div class="row quantity">
                                 <div class="ib">
-                                    <p class="float_left">Price: $<input id="price" name="price" value="<%=size_price[0]['price'] %>" readonly><br>(a $0.75 convenience fee will be added to each item)</p>
+                                    <p class="float_left"><b>Price:</b> $<input id="price" name="price" value="<%=size_price[0]['price'] %>" readonly><br>(a $0.75 convenience fee will be added to each item)</p>
                                 </div>
                                  <div class="row">
                                 <div class="float_right">
@@ -148,9 +153,23 @@ function validateForm(){
       <button class="btn btn-default" type="button"><i class="fa fa-caret-down"></i></button>
     </div>
   </div>
-  <p class="quantity1">Quantity</p>
+  <b><p class="quantity1">Quantity:</p></b>
   </div>
                                 </div>
+                                <div class="row">
+                                     <b><p class="quantity1 color_margin" style="padding-left:25px;">Color Choice:</p></b>   
+                                <div class="float_right">
+                                <div class="form-group">
+  
+  <select class="form-control" name="color" id="sel1">
+    <option value="Gray">Gray</option>
+    <option value="Black">Black</option>
+    <option value="Purple">Purple</option>
+  </select>
+</div>
+                                </div>
+                                </div>
+                        </div>
                             </div>
                             <div class="row personalize">
                                 <%product_info.each do |item| %>
@@ -196,12 +215,13 @@ function validateForm(){
                              <input type="hidden" name="productURL" value="<%=product_info[0]['product_url']%>">
                     </div>
                 </div>
+            
                            </form>
                     </div>
                 </div>
             </div>
             <div class="" id="details">
-                <h4>Order end date and delivery info:</h4>
+                <h4 style="padding-left:10px;">Order end date and delivery info:</h4>
                 <p><%=product_info[0]['order_information'] %></p>
             </div>
             <div class="box social" id="product-social">
