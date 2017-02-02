@@ -262,7 +262,7 @@ enable :sessions
     size = params[:size]
     quantity = params[:quantity].to_i
     color = params[:color]
-    price = params[:price].to_f #hardcoded convenience fee addition
+    price = params[:price].to_f  + 0.75 #hardcoded convenience fee addition
     line1 = params[:youth_name] || ""
     line2 = params[:youth_number] || ""
     line3 = params[:adult_name] || ""
