@@ -21,13 +21,13 @@ class App < Sinatra::Base
   }
 
   db = PG::Connection.new(db_params)
-
-  set :sessions,
-    key: ENV['sessionkey'],
-    domain:  ENV['domain'],
-    path: '/',
-    expire_after: 3600,
-    secret: ENV['sessionsecret']
+enable :sessions
+#  set :sessions,
+#    key: ENV['sessionkey'],
+#    domain:  ENV['domain'],
+#    path: '/',
+#    expire_after: 3600,
+#    secret: ENV['sessionsecret']
 
   Mail.defaults do
     delivery_method :smtp,
@@ -262,12 +262,12 @@ class App < Sinatra::Base
     size = params[:size]
     quantity = params[:quantity].to_i
     color = params[:color]
-    price = params[:price].to_f + 0.75 #hardcoded convenience fee addition
+    price = params[:price].to_f #hardcoded convenience fee addition
     line1 = params[:youth_name] || ""
     line2 = params[:youth_number] || ""
     line3 = params[:adult_name] || ""
     line4 = params[:adult_number] || ""
-    path = ENV['domain'] + '#{session[:campaign_name]}'
+    path = ENV['domain']
     #additional personalization fee
     if line1.length > 0 || line3.length > 0
       price += 3.00
@@ -278,7 +278,7 @@ class App < Sinatra::Base
 
     erb :shop_cart, :locals => {:name => name ,:price => price,
                                 :quantity => quantity,:size => size,:line1 => line1,:line2 => line2,:line3 => line3,
-                                :line4 => line4, :url => url, :domain => path, :campaign_name =>session[:campaign_name],:color => color}
+                                :line4 => line4, :url => url, :domain => path, :campaign_name => session[:campaign_name],:color => color}
   end
 
   post '/view_cart' do
