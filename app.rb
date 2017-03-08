@@ -251,7 +251,7 @@ enable :sessions
   post '/product_details' do
     url = params[ :url]
     size_price = db.exec("SELECT size, price FROM products2 WHERE product_url = '#{url}' ORDER BY size Asc")
-    product_info = db.exec("SELECT product_name, product_description, order_information, product_url, personalization FROM products2 WHERE product_url = '#{url}' LIMIT 1")
+    product_info = db.exec("SELECT product_name, product_description, order_information, product_url, personalization, colors FROM products2 WHERE product_url = '#{url}' LIMIT 1")
     erb :product_details, :locals => {:product_info => product_info, :size_price => size_price}
   end
 
@@ -303,7 +303,7 @@ enable :sessions
     subject = params[:subject]
     subscribers = db.exec("select email from mailing_list")
     message = params[:message]
-    
+
     subscribers.each do |email|
       emails = email["email"]
       Pony.mail(

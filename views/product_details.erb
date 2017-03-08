@@ -53,13 +53,12 @@ function validateForm(){
             <div class="row" id="productMain">
                 <div class="col-sm-6">
                     <div id="mainImage">
-                        <center><img src="<%=product_info[0]['product_url']%>" alt="" class="img-responsive"></center>
+                        <center><img src="<%=product_info[0]['product_url'] %>" alt="" class="img-responsive"></center>
                         </div>
-                        <p>*Product is available in other colors.</p>
-                        <p>*Gray shirt comes with purple/black print.</p>
-                        <p>*Black shirts come with purple/white print.</p> <img src="/img/campaigns/ThunderFastpitch/black.jpeg" class="img-responsive">
-                        <p>*Purple shirts come with black/white print.</p><img src="/img/campaigns/ThunderFastpitch/purple.jpeg" class="img-responsive">
-                    
+                        <center><b><p>*Product is available in <%=product_info[0]['colors'] %> only.</p></b></center>
+
+
+
                 </div>
                 <div class="col-sm-6">
                     <div class="box">
@@ -71,7 +70,11 @@ function validateForm(){
                                 <hr> </hr>
                                 <h4>Youth Sizes</h4>
                                 <%size_price.each do |item| %>
-                                    <%if item['size'] == "1youth small" %>
+                           <%if item['size'] == "0youth xsmall" %>
+                                       <label><a href="#" onClick="showDiv('youth','adult')">XS</a>
+                                       <input type="radio" id="<%=item['size']%>" name="size" value="youth xsmall" class="size-input" data-price="<%=item['price']%>">
+</label>
+                                    <%elsif item['size'] == "1youth small" %>
                                        <label><a href="#" onClick="showDiv('youth','adult')">S</a>
                                        <input type="radio" id="<%=item['size']%>" name="size" value="youth small" class="size-input" data-price="<%=item['price']%>">
 </label>
@@ -95,7 +98,12 @@ function validateForm(){
                                 <%end%>
                                 <h4>Adult Sizes</h4>
                                 <%size_price.each do |item| %>
-                                    <%if item['size'] == "1adult small" %>
+                                    <%if item['size'] == "0adult xsmall" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#" onClick="showDiv('adult','youth')">XS</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="adult xsmall" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                    <%elsif item['size'] == "1adult small" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('adult','youth')">S</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult small" class="size-input" data-price="<%=item['price']%>">
@@ -157,14 +165,14 @@ function validateForm(){
   </div>
                                 </div>
                                 <div class="row">
-                                     <b><p class="quantity1 color_margin" style="padding-left:25px;">Color Choice:</p></b>   
+                                     <b><p class="quantity1 color_margin" style="padding-left:25px;">Color Choice:</p></b>
                                 <div class="float_right">
                                 <div class="form-group">
-  
+
   <select class="form-control" name="color" id="sel1">
-    <option value="Gray">Gray</option>
-    <option value="Black">Black</option>
-    <option value="Purple">Purple</option>
+    <option value="White">White</option>
+    <option value="Red">Red</option>
+
   </select>
 </div>
                                 </div>
@@ -213,9 +221,10 @@ function validateForm(){
                              <input type="hidden" name="productName" value="<%=product_info[0]['product_name']%>">
                              <input type="hidden" name="productDescription" value="<%=product_info[0]['product_description']%>">
                              <input type="hidden" name="productURL" value="<%=product_info[0]['product_url']%>">
+                             <input type="hidden" name="colors" value="<%=product_info[0]['colors']%>">
                     </div>
                 </div>
-            
+
                            </form>
                     </div>
                 </div>
