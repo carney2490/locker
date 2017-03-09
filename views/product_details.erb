@@ -138,7 +138,7 @@ function validateForm(){
                                             <a href="#" onClick="showDiv('adult','youth')">4X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
-                                    <%elsif item['size'] == "8adult xxxxxl " %>
+                                    <%elsif item['size'] == "8adult xxxxxl" %>
                                         <label for="<%=item['size']%>">
                                             <a href="#" onClick="showDiv('adult','youth')">5X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxxxl" class="size-input" data-price="<%=item['price']%>">
@@ -170,9 +170,17 @@ function validateForm(){
                                 <div class="form-group">
 
   <select class="form-control" name="color" id="sel1">
-    <option value="White">White</option>
-    <option value="Red">Red</option>
+      <%product_info.each do |item| %>
+      <%if item['colors'] == "red" %>
+        <option value="Red">Red</option>
+      <%elsif item['colors'] == "white" %>
+        <option value="White">White</option>
+      <%else item['colors'] == "red or white" %>
+        <option value="White">White</option>
+        <option value="Red">Red</option>
 
+      <%end%>
+      <%end%>
   </select>
 </div>
                                 </div>
