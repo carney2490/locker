@@ -143,18 +143,22 @@ function validateForm(){
                                             <a href="#" onClick="showDiv('adult','youth')">5X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxxxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
-                                    <%else%>
-                                    <%end%>
-                                <%end%>
 
+                        </form>
                             </div>
                             <div class="row quantity">
                                 <div class="ib">
-                                    <p class="float_left"><b>Price:</b> $<input id="price" name="price" value=  ><br>(a $0.75 convenience fee will be added to each item)</p>
-                                </div>
+                                    <p class="float_left"><b>Price:</b> $<input id="price" name="price" value="<%=size_price[0]['price'] %> "><br>(a $0.75 convenience fee will be added to each item)</p>
+
+<!--
                                 <script type="text/javascript">
-  document.getElementById("data-price").setAttribute('value', "data-price");
+   var value=document.getElementById('input[name="size"]:checked').getAttribute("data-price");
 </script>
+-->
+                                     </div>
+                                <%else%>
+                                    <%end%>
+                                <%end%>
                                  <div class="row">
                                 <div class="float_right">
                                     <div class="input-group1 spinner">
@@ -238,7 +242,7 @@ function validateForm(){
                     </div>
                 </div>
 
-                           </form>
+
                     </div>
                 </div>
             </div>
@@ -263,4 +267,5 @@ function validateForm(){
                             <a href="mailto:?subject= Look what I'm getting from Shopping Cart &body= If you like this you can get one too.Hurry before the sale is over." class="email" ><i class="fa fa-envelope "></i></a>
 
             </div>
-        </div>
+
+

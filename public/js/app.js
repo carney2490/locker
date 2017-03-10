@@ -21,8 +21,8 @@
 // change product price when clicking on size
 
 $('#productPage label').click(function(){
-  var price = $('[name="size"]:checked').attr('data-price');
-  $('#price').attr("value", price);
+  var price = $document.querySelector('input:radio[name="size"]:checked').attr('data-price');
+  $('#price').setAttribute('value', price);
 });
 
 
