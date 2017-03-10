@@ -150,8 +150,11 @@ function validateForm(){
                             </div>
                             <div class="row quantity">
                                 <div class="ib">
-                                    <p class="float_left"><b>Price:</b> $<input id="price" name="price" value="<%=size_price[0]['price'] %>" readonly><br>(a $0.75 convenience fee will be added to each item)</p>
+                                    <p class="float_left"><b>Price:</b> $<input id="price" name="price" value=  ><br>(a $0.75 convenience fee will be added to each item)</p>
                                 </div>
+                                <script type="text/javascript">
+  document.getElementById("data-price").setAttribute('value', "data-price");
+</script>
                                  <div class="row">
                                 <div class="float_right">
                                     <div class="input-group1 spinner">
@@ -175,6 +178,8 @@ function validateForm(){
         <option value="Red">Red</option>
       <%elsif item['colors'] == "white" %>
         <option value="White">White</option>
+      <%elsif item['colors'] == "royal" %>
+        <option value="Royal">Royal</option>
       <%else item['colors'] == "red or white" %>
         <option value="White">White</option>
         <option value="Red">Red</option>
