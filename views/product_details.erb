@@ -71,26 +71,26 @@ function validateForm(){
                                 <h4>Youth Sizes</h4>
                                 <%size_price.each do |item| %>
                            <%if item['size'] == "0youth xsmall" %>
-                                       <label><a href="#" onClick="showDiv('youth','adult')">XS</a>
+                                       <label><a href="#" onClick="showDiv('youth','adult'); showPrice('<%=item['price']%>');">XS</a>
                                        <input type="radio" id="<%=item['size']%>" name="size" value="youth xsmall" class="size-input" data-price="<%=item['price']%>">
 </label>
                                     <%elsif item['size'] == "1youth small" %>
-                                       <label><a href="#" onClick="showDiv('youth','adult')">S</a>
+                                       <label><a href="#" onClick="showDiv('youth','adult'); showPrice('<%=item['price']%>');">S</a>
                                        <input type="radio" id="<%=item['size']%>" name="size" value="youth small" class="size-input" data-price="<%=item['price']%>">
 </label>
                                     <%elsif item['size'] == "2youth medium" %>
                                        <label for="<%=item['size']%>" >
-     <a href="#" onClick="showDiv('youth','adult')">M</a>
+     <a href="#" onClick="showDiv('youth','adult'); showPrice('<%=item['price']%>');">M</a>
       <input type="radio" id="<%=item['size']%>" name="size" value="youth medium" class="size-input" data-price="<%=item['price']%>" onClick="showDiv('youth','adult')">
       </label>
                                     <%elsif item['size'] == "3youth large" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('youth','adult')">L</a>
+                                            <a href="#" onClick="showDiv('youth','adult'); showPrice('<%=item['price']%>');">L</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="youth large" class="size-input" data-price="<%=item['price']%>" onClick="showDiv('youth','adult')">
                                         </label>
                                     <%elsif item['size'] == "4youth xl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('youth','adult')">XL</a>
+                                            <a href="#" onClick="showDiv('youth','adult'); showPrice('<%=item['price']%>');">XL</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="youth xl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%else%>
@@ -100,47 +100,47 @@ function validateForm(){
                                 <%size_price.each do |item| %>
                                     <%if item['size'] == "0adult xsmall" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">XS</a>
+                                            <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">XS</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xsmall" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "1adult small" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">S</a>
+                                            <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">S</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult small" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "2adult medium" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">M</a>
+                                            <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">M</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult medium" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "3adult large" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">L</a>
+                                            <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">L</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult large" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "4adult xl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">XL</a>
+                                            <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">XL</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "5adult xxl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">2X</a>
+                                            <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">2X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "6adult xxxl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">3X</a>
+                                            <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">3X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "7adult xxxxl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">4X</a>
+                                            <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">4X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%elsif item['size'] == "8adult xxxxxl" %>
                                         <label for="<%=item['size']%>">
-                                            <a href="#" onClick="showDiv('adult','youth')">5X</a>
+                                            <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">5X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxxxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
                                     <%else%>

@@ -3,11 +3,13 @@
 // change product price when clicking on size
 
 $('#productPage label').click(function(){
-  var price = $('[name="size"]:checked').attr('data-price');
-  $('#price').attr("value",price);
+  var price = $document.querySelector('input:radio[name = "size"]:checked== true').data('price');
+  $('#price').setAttribute('value', price);
 });
 
-
+function showPrice(price1){
+ document.getElementById("price").value = price1;
+};
 
 $('.fa-trash-o').click(function(){
   var index = $(this).attr("data-index");
