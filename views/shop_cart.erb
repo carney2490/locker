@@ -10,6 +10,7 @@ window.onload = function(){
 <div class="pgmargin">
 <center>
 <h4 class="center" > Please Wait while we redirect you to paypal's website</h4>
+</center>
 <form name="paypal" target="_self" action="https://www.paypal.com/cgi-bin/webscr" method="post">
   <% if url.include?("img/campaigns/SocialServiceLeague") %>
   <input type="hidden" name="shopping_url" value=<%=domain%>>

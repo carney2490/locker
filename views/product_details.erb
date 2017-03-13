@@ -145,19 +145,13 @@ function validateForm(){
                                         </label>
                                     <%else%>
                                     <%end%>
-                                  <%end%>
-                        </form>
+                                <%end%>
+
                             </div>
-
-
                             <div class="row quantity">
                                 <div class="ib">
-
-                                    <p class="float_left"><b>Price:</b> $<input id="price" name="price" value="<%=size_price[0]['price'] %> "><br>(a $0.75 convenience fee will be added to each item)</p>
-
-
-                                     </div>
-
+                                    <p class="float_left"><b>Price:</b> $<input id="price" name="price" value="<%=size_price[0]['price'] %>" readonly><br>(a $0.75 convenience fee will be added to each item)</p>
+                                </div>
                                  <div class="row">
                                 <div class="float_right">
                                     <div class="input-group1 spinner">
@@ -241,7 +235,7 @@ function validateForm(){
                     </div>
                 </div>
 
-
+                           </form>
                     </div>
                 </div>
             </div>
@@ -266,5 +260,4 @@ function validateForm(){
                             <a href="mailto:?subject= Look what I'm getting from Shopping Cart &body= If you like this you can get one too.Hurry before the sale is over." class="email" ><i class="fa fa-envelope "></i></a>
 
             </div>
-
-
+        </div>
