@@ -143,6 +143,16 @@ function validateForm(){
                                             <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">5X</a>
                                             <input type="radio" id="<%=item['size']%>" name="size" value="adult xxxxxl" class="size-input" data-price="<%=item['price']%>">
                                         </label>
+                                   <%elsif item['size'] == "s/m" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">S/M</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="s/m" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
+                                   <%elsif item['size'] == "l/xl" %>
+                                        <label for="<%=item['size']%>">
+                                            <a href="#" onClick="showDiv('adult','youth'); showPrice('<%=item['price']%>');">L/XL</a>
+                                            <input type="radio" id="<%=item['size']%>" name="size" value="l/xl" class="size-input" data-price="<%=item['price']%>">
+                                        </label>
                                     <%else%>
                                     <%end%>
                                 <%end%>
@@ -177,9 +187,25 @@ function validateForm(){
         <option value="White">White</option>
       <%elsif item['colors'] == "royal" %>
         <option value="Royal">Royal</option>
-      <%else item['colors'] == "red or white" %>
+      <%elsif item['colors'] == "red or white" %>
         <option value="White">White</option>
         <option value="Red">Red</option>
+      <%elsif item['colors'] == "white, purple, jade, sport grey, lime, or dark heather" %>
+        <option value="White">White</option>
+        <option value="Purple">Purple</option>
+        <option value="Jade">Jade</option>
+        <option value="SportGrey">Sport Grey</option>
+        <option value="Lime">Lime</option>
+        <option value="DarkHeather">Dark Heather</option>
+      <%elsif item['colors'] == "white, purple, dark heather, or sports grey" %>
+        <option value="White">White</option>
+        <option value="Purple">Purple</option>
+        <option value="DarkHeather">Dark Heather</option>
+        <option value="SportGrey">Sport Grey</option>
+      <%else item['colors'] == "white, grey, or royal" %>
+        <option value="White">White</option>
+        <option value="Grey">Grey</option>
+        <option value="Royal">Royal</option>
 
       <%end%>
       <%end%>
@@ -212,14 +238,37 @@ function validateForm(){
                                             <br>
                                             </p>
 
+                                             <%if item['product_url'] == "img/campaigns/MinedMinds/hoodie.jpg" %>
                                             <p id="adult" style="display:none">
+                                            Add Name (+ $3.00): <input id="line1" name="adult_name" placeholder="Your name" type="text" maxlength="14" >
+                                                <%elsif item['product_url'] == "img/campaigns/MinedMinds/teeshirt.jpg" %>
+                                            <p id="adult" style="display:none">
+                                            Add Name (+ $3.00): <input id="line1" name="adult_name" placeholder="Your name" type="text" maxlength="14" >
+                                                <%elsif item['product_url'] == "img/campaigns/MinedMinds/longsleevedteeshirt.jpg" %>
+                                            <p id="adult" style="display:none">
+                                            Add Name (+ $3.00): <input id="line1" name="adult_name" placeholder="Your name" type="text" maxlength="14" >
+                                                <%elsif item['product_url'] == "img/campaigns/MinedMinds/hat.jpg" %>
+                                            <p id="adult" style="display:none">
+                                            Add Name (+ $3.00): <input id="line1" name="adult_name" placeholder="Your name" type="text" maxlength="14" >
+                                                <%elsif item['product_url'] == "img/campaigns/MinedMinds/polo.jpg" %>
+                                            <p id="adult" style="display:none">
+                                            Add Name (+ $3.00): <input id="line1" name="adult_name" placeholder="Your name" type="text" maxlength="14" >
+                                                <%elsif item['product_url'] == "img/campaigns/MinedMinds/ladiesteeshirt.jpg" %>
+                                            <p id="adult" style="display:none">
+                                            Add Name (+ $3.00): <input id="line1" name="adult_name" placeholder="Your name" type="text" maxlength="14" >
+                                                <%else%>
+
+                                             <p id="adult" style="display:none">
                                             Add Name (+ $3.00): <input id="line1" name="adult_name" placeholder="Your name" type="text" maxlength="14" >
                                             <br>
                                             Add Number (+ $2.00): <input id="line2"  name="adult_number" placeholder="Your number" type="text" maxlength="14">
                                             <br>
                                             </p>
 
+                                            <%end%>
                                             </div>
+
+
                                     <%end%>
                                 <%end%>
                             </div>
