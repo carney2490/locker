@@ -250,7 +250,7 @@ enable :sessions
 
   post '/product_details' do
     url = params[ :url]
-    size_price = db.exec("SELECT size, price FROM products2 WHERE product_url = '#{url}' ORDER BY size Asc")
+    size_price = db.exec("SELECT size, price, personalization FROM products2 WHERE product_url = '#{url}' ORDER BY size Asc")
     product_info = db.exec("SELECT product_name, product_description, order_information, product_url, personalization, colors FROM products2 WHERE product_url = '#{url}' LIMIT 1")
     erb :product_details, :locals => {:product_info => product_info, :size_price => size_price}
   end
