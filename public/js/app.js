@@ -7,9 +7,7 @@ $('#productPage label').click(function(){
   $('#price').setAttribute('value', price);
 });
 
-function showPrice(price1){
- document.getElementById("price").value = price1;
-};
+
 
 $('.fa-trash-o').click(function(){
   var index = $(this).attr("data-index");
