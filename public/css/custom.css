@@ -83,7 +83,7 @@ legend {
     font-size: 1.5rem;
     margin-bottom: 5px;
     border-bottom: none;
-    
+
 }
 /*carousel*/
 .divBackground{
@@ -101,7 +101,7 @@ legend {
 }
 .adminlink {
     padding-left:2.0rem;
-    
+
 }
 .editlink {
     padding-left:2.0rem;
@@ -115,10 +115,10 @@ legend {
 
 
 #map {
-	position: relative;
-	height: 350px;
-	width: 100%;
-    overflow: hidden;  
+    position: relative;
+    height: 350px;
+    width: 100%;
+    overflow: hidden;
     padding-left:2.0rem;
     padding-right:2.0rem;
 }
@@ -184,7 +184,7 @@ text-align: left;
 .profile
 {
     display:block;
-    width:270px !important;   
+    width:270px !important;
 }
 .editprofilelink {
     background-color:white !important;
@@ -194,7 +194,7 @@ text-align: left;
 .carousel-control.left {left:-25px;}
 .carousel-control.right {right:-25px;}
 .broun-block {
-  
+
     border-top: solid 0px #999999;
     border-bottom: solid 0px #999999;
     padding-bottom: 34px;
@@ -226,7 +226,7 @@ text-align: left;
     line-height: 20px;
 }
 .sprite {
-	background-image: url('');
+    background-image: url('');
 }
 .sprite-i-triangle {
     background-position: 0 -1298px;
@@ -295,13 +295,13 @@ text-align: left;
     display: inline-block;
 }
 .img-center {
-	margin: 0 auto;
+    margin: 0 auto;
 }
 @import url(http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css);
 
 .spinner input {
   text-align: right;
-    
+
 }
 
 .input-group-btn-vertical {
@@ -399,11 +399,16 @@ text-align: left;
     background-color:#38a7bb !important;
 }
 .email_link {
-	background-color:#ffffff;
+    background-color:#ffffff;
 }
 .pgmargin{
    margin-bottom:40rem;
 }
 .new_user{
     padding-left:2.0rem;
+}
+.buttonstyle{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+     appearance: none;
 }
