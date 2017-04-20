@@ -1,3 +1,9 @@
+Databases:
+
+1. Production database currently in use "lockerroom"
+2. Development database used for testing and adding new features "devlocker"
+
+
 To add new campaigns:
 
 STEP 1: can use future dates
