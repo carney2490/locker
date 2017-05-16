@@ -243,6 +243,7 @@ enable :sessions
     session[:campaign_name] = params[:campaign_name]
     end_date = params[:end_date]
     items = db.exec("SELECT item FROM campaign_items WHERE campaign_name='#{session[:campaign_name]}'")
+    
     erb :campaign_order, :locals => {:campaign_name => session[:campaign_name], :end_date => end_date, :items => items}
   end
 
