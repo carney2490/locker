@@ -18,4 +18,6 @@ b) add 400x400px images to img/campaigns/<campaign name>/ folder. Call the image
 
 STEP 3: To enable ordering. nb this part still requires refactoring prior to next campaign
 
-a) add to products table: campaign_name, item, item_description, size, price, personalize_name, personalize_number 
+a) add to products table: campaign_name, item, item_description, size, price, personalize_name, personalize_number # lockerroom
+# lockerroom
+# lockerroom
